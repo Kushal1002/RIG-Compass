@@ -1,0 +1,220 @@
+.advisorPage {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.advisorCard {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.advisorHeader {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.advisorIcon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #0070f2, #0891b2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.advisorTitleGroup h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.advisorTitleGroup p {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.formSection {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.formLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.formSelect {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.formSelect:focus {
+  border-color: var(--color-primary);
+}
+
+.submitBtn {
+  grid-column: 1 / -1;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #0070f2, #0891b2);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition);
+  margin-top: 0.5rem;
+}
+
+.submitBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 112, 242, 0.3);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.resultSection {
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.resultTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.servicesList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.serviceItem {
+  padding: 0.6rem 0.85rem;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.reasoning {
+  padding: 1rem;
+  background: var(--color-neutral-light);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-primary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.benefitsList {
+  margin-bottom: 1rem;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  font-size: 0.82rem;
+  color: var(--color-text);
+}
+
+.benefitIcon {
+  color: var(--color-success);
+}
+
+.complexityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.complexityBadge.low {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.complexityBadge.medium {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.complexityBadge.high {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.noResult {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .advisorPage {
+    padding: 1rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicesList {
+    grid-template-columns: 1fr;
+  }
+}

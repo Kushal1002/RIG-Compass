@@ -1,0 +1,311 @@
+.dashboard {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.content {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Risk & Health Summary */
+.riskSummary {
+  padding: 0 1.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.riskCard {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-light);
+}
+
+.riskTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.riskGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.riskItem {
+  padding: 0.85rem 0.5rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.riskItem.high { background: var(--color-danger-light); }
+.riskItem.medium { background: var(--color-warning-light); }
+.riskItem.low { background: var(--color-success-light); }
+
+.riskCount {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.riskItem.high .riskCount { color: var(--color-danger); }
+.riskItem.medium .riskCount { color: var(--color-warning); }
+.riskItem.low .riskCount { color: var(--color-success); }
+
+.riskLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+.riskItem.high .riskLabel { color: var(--color-danger); }
+.riskItem.medium .riskLabel { color: var(--color-warning); }
+.riskItem.low .riskLabel { color: var(--color-success); }
+
+.healthItem {
+  padding: 0.85rem 0.5rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+/* Critical Engagements Section */
+.criticalSection {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.criticalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.criticalTitle {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.criticalCount {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--color-danger);
+  background: var(--color-danger-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+.criticalGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.75rem;
+}
+
+.criticalCard {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-light);
+  border-left: 3px solid var(--color-danger);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.criticalCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.criticalCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.criticalCustomer {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.riskBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.riskBadge.high {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.riskBadge.medium {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.riskBadge.low {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.criticalMeta {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+
+.criticalProgress {
+  margin-bottom: 0.6rem;
+}
+
+.criticalReason {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--color-danger);
+  background: var(--color-danger-light);
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.45rem;
+  line-height: 1.4;
+}
+
+.criticalAction {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-sm);
+  line-height: 1.4;
+}
+
+/* Executive Recommendations */
+.recommendationsSection {
+  padding: 0 1.5rem 2rem;
+}
+
+.recCard {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-light);
+}
+
+.recTitle {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.recList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.recItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition);
+}
+
+.recItem:hover {
+  transform: translateX(3px);
+}
+
+.recText {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.recDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.recDot.critical { background: var(--color-danger); }
+.recDot.warning { background: var(--color-warning); }
+.recDot.info { background: var(--color-primary); }
+
+.severityBadge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 0.12rem 0.4rem;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.severityBadge.critical {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.severityBadge.warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.severityBadge.info {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+@media (max-width: 1024px) {
+  .riskSummary {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 1rem;
+  }
+
+  .criticalGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .criticalSection, .recommendationsSection {
+    padding: 0 1rem 1rem;
+  }
+
+  .riskGrid {
+    grid-template-columns: 1fr;
+  }
+}

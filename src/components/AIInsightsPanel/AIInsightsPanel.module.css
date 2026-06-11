@@ -1,0 +1,139 @@
+.insightsSection {
+  padding: 0 1.5rem 1.25rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.insightsCard {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--color-border-light);
+}
+
+.insightsTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.insightsList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.insightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-border-light);
+  transition: all var(--transition);
+}
+
+.insightItem:hover {
+  box-shadow: var(--shadow-xs);
+  transform: translateX(2px);
+}
+
+.insightItem.high {
+  border-left-color: var(--color-danger);
+}
+
+.insightItem.medium {
+  border-left-color: var(--color-warning);
+}
+
+.insightItem.low {
+  border-left-color: var(--color-success);
+}
+
+.insightIcon {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.insightIcon.high {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.insightIcon.medium {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.insightIcon.low {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.insightContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.insightText {
+  font-size: 0.78rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.insightMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.impactBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.12rem 0.4rem;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.impactBadge.high {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.impactBadge.medium {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.impactBadge.low {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.insightCategory {
+  font-size: 0.62rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .insightsSection {
+    padding: 0 1rem 1rem;
+  }
+
+  .insightsList {
+    grid-template-columns: 1fr;
+  }
+}
