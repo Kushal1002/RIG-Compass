@@ -20,6 +20,7 @@ export default function FilterBar({ filters, onFilterChange, engagements }) {
           className={styles.searchInput}
           value={filters.search}
           onChange={(e) => onFilterChange('search', e.target.value)}
+          maxLength={100}
         />
       </div>
 

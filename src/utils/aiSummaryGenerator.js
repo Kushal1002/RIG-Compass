@@ -40,8 +40,9 @@ function getHealthFromProgress(progress, status) {
 function getRiskLevel(progress, status, endDate) {
   const daysToEnd = Math.ceil((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24));
 
-  if (status === "Blocked" && progress < 50) return "high";
+  if (status === "Completed") return "low";
   if (status === "Blocked") return "high";
+  if (daysToEnd < 0) return "high";
   if (daysToEnd <= 14 && progress < 90) return "high";
   if (progress < 70) return "medium";
   return "low";
@@ -135,12 +136,11 @@ export function calculateRiskLevel(engagement) {
   const { status, progress, endDate } = engagement;
   const daysToEnd = Math.ceil((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24));
 
-  if (status === "Blocked" || (daysToEnd <= 14 && progress < 90)) {
-    return "High";
-  }
-  if (progress < 70 && status === "In Progress") {
-    return "Medium";
-  }
+  if (status === "Completed") return "Low";
+  if (status === "Blocked") return "High";
+  if (daysToEnd < 0) return "High";
+  if (daysToEnd <= 14 && progress < 90) return "High";
+  if (progress < 70 && status === "In Progress") return "Medium";
   return "Low";
 }
 

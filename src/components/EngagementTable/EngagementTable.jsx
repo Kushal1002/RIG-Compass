@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronUp, ChevronDown, Eye, AlertCircle, Shield } from 'lucide-react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import HealthBadge from '../HealthBadge/HealthBadge';
@@ -11,6 +11,10 @@ export default function EngagementTable({ engagements, onSelectEngagement }) {
   const [sortField, setSortField] = useState('customerName');
   const [sortDir, setSortDir] = useState('asc');
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+  }, [engagements]);
 
   const handleSort = (field) => {
     if (sortField === field) {

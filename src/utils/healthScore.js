@@ -18,7 +18,8 @@ export function calculateHealthScore(engagement) {
 
   // Timeline penalties
   const daysToEnd = Math.ceil((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24));
-  if (daysToEnd <= 7 && progress < 50) score -= 20;
+  if (daysToEnd < 0 && status !== 'Completed') score -= 30;
+  else if (daysToEnd <= 7 && progress < 50) score -= 20;
   else if (daysToEnd <= 14 && progress < 70) score -= 15;
 
   // Blocker penalties

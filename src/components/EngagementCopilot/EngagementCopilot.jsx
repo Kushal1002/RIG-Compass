@@ -122,6 +122,7 @@ export default function EngagementCopilot() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
+            maxLength={200}
           />
           <button
             className={styles.sendBtn}

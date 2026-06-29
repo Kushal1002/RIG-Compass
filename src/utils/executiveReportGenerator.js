@@ -14,8 +14,8 @@ export function generateExecutiveReport(engagements) {
   const blocked = engagements.filter(e => e.status === 'Blocked').length;
   const notStarted = engagements.filter(e => e.status === 'Not Started').length;
 
-  const avgProgress = Math.round(engagements.reduce((s, e) => s + e.progress, 0) / total);
-  const completionRate = Math.round((completed / total) * 100);
+  const avgProgress = total > 0 ? Math.round(engagements.reduce((s, e) => s + e.progress, 0) / total) : 0;
+  const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   const highRisk = engagements.filter(e => calculateRiskLevel(e) === 'High');
   const criticalHealth = engagements.filter(e => calculateHealthScore(e) < 50);

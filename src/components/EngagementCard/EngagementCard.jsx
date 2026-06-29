@@ -7,8 +7,8 @@ import styles from './EngagementCard.module.css';
 
 const TIMELINE_PHASES = [
   { label: 'Discovery', maxProgress: 15 },
-  { label: 'Env Setup', maxProgress: 30 },
-  { label: 'Design', maxProgress: 50 },
+  { label: 'Environment Setup', maxProgress: 30 },
+  { label: 'Solution Design', maxProgress: 50 },
   { label: 'Prototype', maxProgress: 70 },
   { label: 'Testing', maxProgress: 90 },
   { label: 'Go Live', maxProgress: 100 },
@@ -41,10 +41,7 @@ export default function EngagementCard({ engagement, onClose, onGenerateSummary 
 
   const getTimelineStatus = (phase) => {
     const phaseIndex = TIMELINE_PHASES.findIndex(p => p.label === phase.label);
-    const currentIndex = TIMELINE_PHASES.findIndex(p => p.label === currentPhase || 
-      (currentPhase === 'Environment Setup' && p.label === 'Env Setup') ||
-      (currentPhase === 'Solution Design' && p.label === 'Design'));
-
+    const currentIndex = TIMELINE_PHASES.findIndex(p => p.label === currentPhase);
     if (phaseIndex < currentIndex) return 'completed';
     if (phaseIndex === currentIndex) return 'current';
     return 'upcoming';

@@ -102,7 +102,7 @@ export function processCopilotQuery(query, engagements) {
     const blocked = engagements.filter(e => e.status === 'Blocked').length;
     const completed = engagements.filter(e => e.status === 'Completed').length;
     const notStarted = engagements.filter(e => e.status === 'Not Started').length;
-    const avgProgress = Math.round(engagements.reduce((s, e) => s + e.progress, 0) / engagements.length);
+    const avgProgress = Math.round(engagements.reduce((s, e) => s + e.progress, 0) / (engagements.length || 1));
     let response = `Portfolio Overview:\n\n`;
     response += `• **Total Engagements:** ${engagements.length}\n`;
     response += `• **Active:** ${active} | **Blocked:** ${blocked} | **Completed:** ${completed} | **Not Started:** ${notStarted}\n`;
