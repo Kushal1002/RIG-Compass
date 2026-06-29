@@ -183,6 +183,18 @@
   border-color: var(--color-primary);
 }
 
+.editBtn {
+  margin-left: 0.3rem;
+  color: var(--color-warning);
+  border-color: var(--color-warning-light);
+}
+
+.editBtn:hover {
+  background: var(--color-warning);
+  color: white;
+  border-color: var(--color-warning);
+}
+
 .pagination {
   display: flex;
   align-items: center;

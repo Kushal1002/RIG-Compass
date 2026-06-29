@@ -77,6 +77,29 @@
   text-align: center;
 }
 
+.healthItem.healthy   { background: var(--color-success-light); }
+.healthItem.stable    { background: var(--color-primary-light); }
+.healthItem.attention { background: var(--color-warning-light); }
+.healthItem.critical  { background: var(--color-danger-light);  }
+
+.healthItem.healthy   .riskCount,
+.healthItem.healthy   .riskLabel  { color: var(--color-success); }
+
+.healthItem.stable    .riskCount,
+.healthItem.stable    .riskLabel  { color: var(--color-primary); }
+
+.healthItem.attention .riskCount,
+.healthItem.attention .riskLabel  { color: var(--color-warning); }
+
+.healthItem.critical  .riskCount,
+.healthItem.critical  .riskLabel  { color: var(--color-danger); }
+
+.healthGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+
 /* Critical Engagements Section */
 .criticalSection {
   padding: 0 1.5rem 1.25rem;

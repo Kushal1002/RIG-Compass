@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronUp, ChevronDown, Eye, AlertCircle, Shield } from 'lucide-react';
+import { ChevronUp, ChevronDown, Eye, AlertCircle, Shield, Pencil } from 'lucide-react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import HealthBadge from '../HealthBadge/HealthBadge';
 import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
@@ -7,7 +7,7 @@ import styles from './EngagementTable.module.css';
 
 const PAGE_SIZE = 7;
 
-export default function EngagementTable({ engagements, onSelectEngagement }) {
+export default function EngagementTable({ engagements, onSelectEngagement, onEditEngagement }) {
   const [sortField, setSortField] = useState('customerName');
   const [sortDir, setSortDir] = useState('asc');
   const [page, setPage] = useState(1);
@@ -123,6 +123,14 @@ export default function EngagementTable({ engagements, onSelectEngagement }) {
                     >
                       <Eye size={12} /> View
                     </button>
+                    {onEditEngagement && (
+                      <button
+                        className={`${styles.actionBtn} ${styles.editBtn}`}
+                        onClick={(e) => { e.stopPropagation(); onEditEngagement(eng); }}
+                      >
+                        <Pencil size={12} /> Edit
+                      </button>
+                    )}
                   </td>
                 </tr>
               );

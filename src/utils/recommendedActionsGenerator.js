@@ -1,14 +1,18 @@
 import { calculateRiskLevel } from './aiSummaryGenerator';
 import { calculateHealthScore, getHealthClassification } from './healthScore';
 
-/**
- * Generate recommended actions for an engagement
- */
 export function generateRecommendedActions(engagement) {
-  const { status, progress, endDate, blockers } = engagement;
+  const { status, progress, endDate } = engagement;
   const daysToEnd = Math.ceil((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24));
-  const risk = calculateRiskLevel(engagement);
   const actions = [];
+
+  if (daysToEnd < 0 && status !== 'Completed') {
+    actions.push({
+      priority: 'Critical',
+      action: 'Engagement is overdue — escalate immediately and agree revised timeline with customer',
+      icon: 'alert-triangle'
+    });
+  }
 
   if (status === 'Blocked') {
     actions.push({
@@ -41,7 +45,7 @@ export function generateRecommendedActions(engagement) {
     });
   }
 
-  if (daysToEnd <= 14 && progress < 90 && status !== 'Completed') {
+  if (daysToEnd <= 14 && daysToEnd >= 0 && progress < 90 && status !== 'Completed') {
     actions.push({
       priority: 'High',
       action: 'Conduct immediate risk review with project team',
@@ -54,7 +58,7 @@ export function generateRecommendedActions(engagement) {
     });
   }
 
-  if (daysToEnd <= 7 && status !== 'Completed') {
+  if (daysToEnd <= 7 && daysToEnd >= 0 && status !== 'Completed') {
     actions.push({
       priority: 'Critical',
       action: 'Escalate to leadership — deadline imminent',
@@ -101,7 +105,6 @@ export function generateRecommendedActions(engagement) {
     });
   }
 
-  // Ensure at least one action
   if (actions.length === 0) {
     actions.push({
       priority: 'Low',

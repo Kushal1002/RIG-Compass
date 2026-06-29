@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { Bot, Send, Sparkles } from 'lucide-react';
-import { engagements } from '../../data/engagements';
 import { processCopilotQuery } from '../../utils/copilotEngine';
 import styles from './EngagementCopilot.module.css';
 
@@ -13,7 +12,7 @@ const SUGGESTED_QUESTIONS = [
   { label: 'Needs Attention', query: 'What needs attention this week?' },
 ];
 
-export default function EngagementCopilot() {
+export default function EngagementCopilot({ engagements }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);

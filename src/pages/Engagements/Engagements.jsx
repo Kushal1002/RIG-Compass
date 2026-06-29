@@ -4,8 +4,8 @@ import FilterBar from '../../components/FilterBar/FilterBar';
 import EngagementTable from '../../components/EngagementTable/EngagementTable';
 import EngagementCard from '../../components/EngagementCard/EngagementCard';
 import AISummaryModal from '../../components/AISummaryModal/AISummaryModal';
+import EditEngagementModal from '../../components/EditEngagementModal/EditEngagementModal';
 import EmptyState from '../../components/EmptyState/EmptyState';
-import { engagements as allEngagements } from '../../data/engagements';
 import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
 import styles from './Engagements.module.css';
 
@@ -17,10 +17,11 @@ const initialFilters = {
   owner: 'All',
 };
 
-export default function Engagements() {
+export default function Engagements({ engagements: allEngagements, onUpdate }) {
   const [filters, setFilters] = useState(initialFilters);
   const [selectedEngagement, setSelectedEngagement] = useState(null);
   const [summaryEngagement, setSummaryEngagement] = useState(null);
+  const [editEngagement, setEditEngagement] = useState(null);
 
   const handleFilterChange = (key, value) => {
     if (key === 'reset') {
@@ -99,6 +100,7 @@ export default function Engagements() {
         <EngagementTable
           engagements={filteredEngagements}
           onSelectEngagement={setSelectedEngagement}
+          onEditEngagement={setEditEngagement}
         />
       ) : (
         <EmptyState />
@@ -116,6 +118,14 @@ export default function Engagements() {
         <AISummaryModal
           engagement={summaryEngagement}
           onClose={() => setSummaryEngagement(null)}
+        />
+      )}
+
+      {editEngagement && (
+        <EditEngagementModal
+          engagement={editEngagement}
+          onSave={onUpdate}
+          onClose={() => setEditEngagement(null)}
         />
       )}
     </div>

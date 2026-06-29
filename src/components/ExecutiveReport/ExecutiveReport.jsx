@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
 import { FileText, Download, Clock } from 'lucide-react';
-import { engagements } from '../../data/engagements';
 import { generateExecutiveReport, downloadReport } from '../../utils/executiveReportGenerator';
 import styles from './ExecutiveReport.module.css';
 
-export default function ExecutiveReport() {
-  const report = useMemo(() => generateExecutiveReport(engagements), []);
+export default function ExecutiveReport({ engagements }) {
+  const report = useMemo(() => generateExecutiveReport(engagements), [engagements]);
 
   const handleDownload = () => {
     const date = new Date().toISOString().split('T')[0];

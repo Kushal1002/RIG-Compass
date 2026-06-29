@@ -7,27 +7,29 @@ import EngagementCopilot from './components/EngagementCopilot/EngagementCopilot'
 import BTPSolutionAdvisor from './components/BTPSolutionAdvisor/BTPSolutionAdvisor';
 import ExecutiveReport from './components/ExecutiveReport/ExecutiveReport';
 import Settings from './pages/Settings/Settings';
+import { useEngagements } from './hooks/useEngagements';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const { engagements, updateEngagement } = useEngagements();
 
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard engagements={engagements} />;
       case 'engagements':
-        return <Engagements />;
+        return <Engagements engagements={engagements} onUpdate={updateEngagement} />;
       case 'copilot':
-        return <EngagementCopilot />;
+        return <EngagementCopilot engagements={engagements} />;
       case 'advisor':
         return <BTPSolutionAdvisor />;
       case 'reports':
-        return <ExecutiveReport />;
+        return <ExecutiveReport engagements={engagements} />;
       case 'settings':
         return <Settings />;
       default:
-        return <Dashboard />;
+        return <Dashboard engagements={engagements} />;
     }
   };
 

@@ -5,104 +5,94 @@ import Charts from '../../components/Charts/Charts';
 import TeamWorkload from '../../components/TeamWorkload/TeamWorkload';
 import AIInsightsPanel from '../../components/AIInsightsPanel/AIInsightsPanel';
 import ExecutiveSummary from '../../components/ExecutiveSummary/ExecutiveSummary';
-import HealthBadge from '../../components/HealthBadge/HealthBadge';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import { engagements as allEngagements } from '../../data/engagements';
-import { calculateRiskLevel, generateAISummary } from '../../utils/aiSummaryGenerator';
+import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
 import { calculateHealthScore, getHealthClassification } from '../../utils/healthScore';
 import { generateRecommendedActions } from '../../utils/recommendedActionsGenerator';
 import styles from './Dashboard.module.css';
 
-export default function Dashboard() {
-  const riskCounts = useMemo(() => {
-    const counts = { High: 0, Medium: 0, Low: 0 };
-    allEngagements.forEach(e => {
-      const risk = calculateRiskLevel(e);
-      counts[risk]++;
-    });
-    return counts;
-  }, []);
+export default function Dashboard({ engagements }) {
+  const derived = useMemo(() => {
+    const riskCounts = { High: 0, Medium: 0, Low: 0 };
+    const healthDistribution = { Healthy: 0, Stable: 0, 'Needs Attention': 0, Critical: 0 };
+    const ownerCounts = {};
+    const industryRisk = {};
+    const criticals = [];
 
-  const healthDistribution = useMemo(() => {
-    const dist = { Healthy: 0, Stable: 0, 'Needs Attention': 0, Critical: 0 };
-    allEngagements.forEach(e => {
+    for (const e of engagements) {
+      const risk = calculateRiskLevel(e);
       const score = calculateHealthScore(e);
       const { label } = getHealthClassification(score);
-      dist[label]++;
-    });
-    return dist;
-  }, []);
 
-  const criticalEngagements = useMemo(() => {
-    return allEngagements
-      .filter(e => e.status === 'Blocked' || calculateRiskLevel(e) === 'High')
-      .slice(0, 5)
-      .map(e => {
-        const risk = calculateRiskLevel(e);
-        const actions = generateRecommendedActions(e);
+      riskCounts[risk]++;
+      healthDistribution[label]++;
+
+      if (e.status === 'In Progress') {
+        ownerCounts[e.owner] = (ownerCounts[e.owner] || 0) + 1;
+      }
+      if (risk === 'High') {
+        industryRisk[e.industry] = (industryRisk[e.industry] || 0) + 1;
+      }
+      if (e.status === 'Blocked' || risk === 'High') {
         const reason = e.status === 'Blocked'
-          ? (e.blockers || 'Blocked - requires escalation')
-          : `High risk - ${e.progress}% progress with approaching deadline`;
-        return {
+          ? (e.blockers || 'Blocked — requires escalation')
+          : `High risk — ${e.progress}% progress with approaching deadline`;
+        const actions = generateRecommendedActions(e);
+        criticals.push({
           ...e,
           risk,
           reason,
           recommendation: actions[0]?.action || 'Review and escalate',
-        };
-      });
-  }, []);
+        });
+      }
+    }
 
-  const executiveRecommendations = useMemo(() => {
-    const recs = [];
-    const blocked = allEngagements.filter(e => e.status === 'Blocked');
-    const highRisk = allEngagements.filter(e => calculateRiskLevel(e) === 'High');
-
-    // Workload analysis
-    const ownerCounts = {};
-    allEngagements.filter(e => e.status === 'In Progress').forEach(e => {
-      ownerCounts[e.owner] = (ownerCounts[e.owner] || 0) + 1;
-    });
-    const maxOwner = Object.entries(ownerCounts).sort((a, b) => b[1] - a[1])[0];
-
-    // Industry risk analysis
-    const industryRisk = {};
-    highRisk.forEach(e => {
-      industryRisk[e.industry] = (industryRisk[e.industry] || 0) + 1;
-    });
+    const sortedOwners = Object.entries(ownerCounts).sort((a, b) => b[1] - a[1]);
+    const maxOwner = sortedOwners[0];
     const riskyIndustry = Object.entries(industryRisk).sort((a, b) => b[1] - a[1])[0];
+    const blocked = engagements.filter(e => e.status === 'Blocked');
+    const highRisk = engagements.filter(e => calculateRiskLevel(e) === 'High');
 
+    const executiveRecommendations = [];
     if (blocked.length > 0) {
-      recs.push({ severity: 'critical', text: `Escalate ${blocked.length} blocked engagement${blocked.length > 1 ? 's' : ''} with immediate stakeholder review` });
+      executiveRecommendations.push({ severity: 'critical', text: `Escalate ${blocked.length} blocked engagement${blocked.length > 1 ? 's' : ''} with immediate stakeholder review` });
     }
     if (highRisk.length > 0) {
-      recs.push({ severity: 'critical', text: `${highRisk.length} high-risk engagement${highRisk.length > 1 ? 's require' : ' requires'} urgent delivery intervention` });
+      executiveRecommendations.push({ severity: 'critical', text: `${highRisk.length} high-risk engagement${highRisk.length > 1 ? 's require' : ' requires'} urgent delivery intervention` });
     }
     if (maxOwner && maxOwner[1] >= 4) {
-      recs.push({ severity: 'warning', text: `Rebalance team capacity - ${maxOwner[0]} is managing ${maxOwner[1]} active engagements` });
+      executiveRecommendations.push({ severity: 'warning', text: `Rebalance team capacity — ${maxOwner[0]} is managing ${maxOwner[1]} active engagements` });
     }
     if (riskyIndustry) {
-      recs.push({ severity: 'warning', text: `Review ${riskyIndustry[0]} engagements - highest risk concentration (${riskyIndustry[1]} high-risk)` });
+      executiveRecommendations.push({ severity: 'warning', text: `Review ${riskyIndustry[0]} engagements — highest risk concentration (${riskyIndustry[1]} high-risk)` });
     }
-    recs.push({ severity: 'info', text: 'Schedule quarterly portfolio review with regional leadership' });
-    recs.push({ severity: 'info', text: 'Prioritize resource allocation for approaching deadline engagements' });
+    executiveRecommendations.push({ severity: 'info', text: 'Schedule quarterly portfolio review with regional leadership' });
+    executiveRecommendations.push({ severity: 'info', text: 'Prioritize resource allocation for approaching deadline engagements' });
 
-    return recs;
-  }, []);
+    return {
+      riskCounts,
+      healthDistribution,
+      criticalEngagements: criticals.slice(0, 5),
+      executiveRecommendations,
+    };
+  }, [engagements]);
+
+  const { riskCounts, healthDistribution, criticalEngagements, executiveRecommendations } = derived;
 
   return (
     <div className={styles.dashboard}>
       <div className={styles.content}>
         {/* Section 1: Executive Summary Hero */}
-        <ExecutiveSummary engagements={allEngagements} />
+        <ExecutiveSummary engagements={engagements} />
 
         {/* Section 2: AI Portfolio Insights */}
-        <AIInsightsPanel engagements={allEngagements} />
+        <AIInsightsPanel engagements={engagements} />
 
         {/* Section 3: Portfolio KPIs */}
-        <KPISection engagements={allEngagements} />
+        <KPISection engagements={engagements} />
 
         {/* Section 4: Portfolio Visualizations */}
-        <Charts engagements={allEngagements} />
+        <Charts engagements={engagements} />
 
         {/* Risk & Health Distribution */}
         <div className={styles.riskSummary}>
@@ -132,29 +122,29 @@ export default function Dashboard() {
               <Target size={14} />
               Health Distribution
             </h3>
-            <div className={styles.riskGrid} style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
-              <div className={styles.healthItem} style={{ background: '#e6f4e6' }}>
-                <div className={styles.riskCount} style={{ color: '#188918' }}>{healthDistribution.Healthy}</div>
-                <div className={styles.riskLabel} style={{ color: '#188918' }}>Healthy</div>
+            <div className={`${styles.riskGrid} ${styles.healthGrid}`}>
+              <div className={`${styles.healthItem} ${styles.healthy}`}>
+                <div className={styles.riskCount}>{healthDistribution.Healthy}</div>
+                <div className={styles.riskLabel}>Healthy</div>
               </div>
-              <div className={styles.healthItem} style={{ background: '#e8f4fd' }}>
-                <div className={styles.riskCount} style={{ color: '#0070f2' }}>{healthDistribution.Stable}</div>
-                <div className={styles.riskLabel} style={{ color: '#0070f2' }}>Stable</div>
+              <div className={`${styles.healthItem} ${styles.stable}`}>
+                <div className={styles.riskCount}>{healthDistribution.Stable}</div>
+                <div className={styles.riskLabel}>Stable</div>
               </div>
-              <div className={styles.healthItem} style={{ background: '#fef3e6' }}>
-                <div className={styles.riskCount} style={{ color: '#e76500' }}>{healthDistribution['Needs Attention']}</div>
-                <div className={styles.riskLabel} style={{ color: '#e76500' }}>Attention</div>
+              <div className={`${styles.healthItem} ${styles.attention}`}>
+                <div className={styles.riskCount}>{healthDistribution['Needs Attention']}</div>
+                <div className={styles.riskLabel}>Attention</div>
               </div>
-              <div className={styles.healthItem} style={{ background: '#fce6e6' }}>
-                <div className={styles.riskCount} style={{ color: '#cc1919' }}>{healthDistribution.Critical}</div>
-                <div className={styles.riskLabel} style={{ color: '#cc1919' }}>Critical</div>
+              <div className={`${styles.healthItem} ${styles.critical}`}>
+                <div className={styles.riskCount}>{healthDistribution.Critical}</div>
+                <div className={styles.riskLabel}>Critical</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Section 5: Team Capacity */}
-        <TeamWorkload engagements={allEngagements} />
+        <TeamWorkload engagements={engagements} />
 
         {/* Section 6: Critical Engagements */}
         <div className={styles.criticalSection}>
