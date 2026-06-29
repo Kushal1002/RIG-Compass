@@ -4,7 +4,6 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Engagements from './pages/Engagements/Engagements';
 import EngagementCopilot from './components/EngagementCopilot/EngagementCopilot';
-import BTPSolutionAdvisor from './components/BTPSolutionAdvisor/BTPSolutionAdvisor';
 import ExecutiveReport from './components/ExecutiveReport/ExecutiveReport';
 import Settings from './pages/Settings/Settings';
 import { useEngagements } from './hooks/useEngagements';
@@ -22,8 +21,6 @@ function App() {
         return <Engagements engagements={engagements} onUpdate={updateEngagement} />;
       case 'copilot':
         return <EngagementCopilot engagements={engagements} />;
-      case 'advisor':
-        return <BTPSolutionAdvisor />;
       case 'reports':
         return <ExecutiveReport engagements={engagements} />;
       case 'settings':

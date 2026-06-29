@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
-  LayoutDashboard, Users, Brain, BarChart3, FileText, Settings, Menu,
-  ChevronLeft, Bot, Layers
+  LayoutDashboard, Users, FileText, Settings, Menu,
+  ChevronLeft, Bot
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
@@ -9,7 +9,6 @@ const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, section: 'main' },
   { id: 'engagements', label: 'Engagements', icon: Users, section: 'main', badge: null },
   { id: 'copilot', label: 'AI Copilot', icon: Bot, section: 'ai' },
-  { id: 'advisor', label: 'Solution Advisor', icon: Layers, section: 'ai' },
   { id: 'reports', label: 'Reports', icon: FileText, section: 'tools' },
   { id: 'settings', label: 'Settings', icon: Settings, section: 'tools' },
 ];

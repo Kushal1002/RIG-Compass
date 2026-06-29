@@ -1,31 +1,28 @@
 import { useMemo } from 'react';
-import { Sparkles, AlertTriangle, TrendingUp, Shield, Target } from 'lucide-react';
-import KPISection from '../../components/KPISection/KPISection';
+import { Sparkles, AlertTriangle, TrendingUp, Clock } from 'lucide-react';
 import Charts from '../../components/Charts/Charts';
 import TeamWorkload from '../../components/TeamWorkload/TeamWorkload';
 import AIInsightsPanel from '../../components/AIInsightsPanel/AIInsightsPanel';
 import ExecutiveSummary from '../../components/ExecutiveSummary/ExecutiveSummary';
+import KPISection from '../../components/KPISection/KPISection';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
-import { calculateHealthScore, getHealthClassification } from '../../utils/healthScore';
 import { generateRecommendedActions } from '../../utils/recommendedActionsGenerator';
 import styles from './Dashboard.module.css';
 
 export default function Dashboard({ engagements }) {
   const derived = useMemo(() => {
-    const riskCounts = { High: 0, Medium: 0, Low: 0 };
-    const healthDistribution = { Healthy: 0, Stable: 0, 'Needs Attention': 0, Critical: 0 };
     const ownerCounts = {};
     const industryRisk = {};
     const criticals = [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const overdue = [];
 
     for (const e of engagements) {
       const risk = calculateRiskLevel(e);
-      const score = calculateHealthScore(e);
-      const { label } = getHealthClassification(score);
-
-      riskCounts[risk]++;
-      healthDistribution[label]++;
+      const endDate = new Date(e.endDate);
+      endDate.setHours(0, 0, 0, 0);
 
       if (e.status === 'In Progress') {
         ownerCounts[e.owner] = (ownerCounts[e.owner] || 0) + 1;
@@ -39,11 +36,13 @@ export default function Dashboard({ engagements }) {
           : `High risk — ${e.progress}% progress with approaching deadline`;
         const actions = generateRecommendedActions(e);
         criticals.push({
-          ...e,
-          risk,
-          reason,
+          ...e, risk, reason,
           recommendation: actions[0]?.action || 'Review and escalate',
         });
+      }
+      if (endDate < today && e.status !== 'Completed') {
+        const daysOver = Math.ceil((today - endDate) / (1000 * 60 * 60 * 24));
+        overdue.push({ ...e, daysOver });
       }
     }
 
@@ -54,6 +53,9 @@ export default function Dashboard({ engagements }) {
     const highRisk = engagements.filter(e => calculateRiskLevel(e) === 'High');
 
     const executiveRecommendations = [];
+    if (overdue.length > 0) {
+      executiveRecommendations.push({ severity: 'critical', text: `${overdue.length} engagement${overdue.length > 1 ? 's are' : ' is'} past the agreed end date — agree revised timelines immediately` });
+    }
     if (blocked.length > 0) {
       executiveRecommendations.push({ severity: 'critical', text: `Escalate ${blocked.length} blocked engagement${blocked.length > 1 ? 's' : ''} with immediate stakeholder review` });
     }
@@ -70,14 +72,16 @@ export default function Dashboard({ engagements }) {
     executiveRecommendations.push({ severity: 'info', text: 'Prioritize resource allocation for approaching deadline engagements' });
 
     return {
-      riskCounts,
-      healthDistribution,
       criticalEngagements: criticals.slice(0, 5),
+      overdue,
       executiveRecommendations,
     };
   }, [engagements]);
 
-  const { riskCounts, healthDistribution, criticalEngagements, executiveRecommendations } = derived;
+  const { criticalEngagements, overdue, executiveRecommendations } = derived;
+
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   return (
     <div className={styles.dashboard}>
@@ -94,54 +98,44 @@ export default function Dashboard({ engagements }) {
         {/* Section 4: Portfolio Visualizations */}
         <Charts engagements={engagements} />
 
-        {/* Risk & Health Distribution */}
-        <div className={styles.riskSummary}>
-          <div className={styles.riskCard}>
-            <h3 className={styles.riskTitle}>
-              <Shield size={14} />
-              Risk Distribution
-            </h3>
-            <div className={styles.riskGrid}>
-              <div className={`${styles.riskItem} ${styles.high}`}>
-                <div className={styles.riskCount}>{riskCounts.High}</div>
-                <div className={styles.riskLabel}>High Risk</div>
-              </div>
-              <div className={`${styles.riskItem} ${styles.medium}`}>
-                <div className={styles.riskCount}>{riskCounts.Medium}</div>
-                <div className={styles.riskLabel}>Medium Risk</div>
-              </div>
-              <div className={`${styles.riskItem} ${styles.low}`}>
-                <div className={styles.riskCount}>{riskCounts.Low}</div>
-                <div className={styles.riskLabel}>Low Risk</div>
-              </div>
+        {/* Section 4: Overdue Engagements */}
+        {overdue.length > 0 && (
+          <div className={styles.overdueSection}>
+            <div className={styles.criticalHeader}>
+              <h3 className={styles.criticalTitle}>
+                <Clock size={15} />
+                Overdue Engagements
+              </h3>
+              <span className={styles.criticalCount}>{overdue.length} past deadline</span>
+            </div>
+            <div className={styles.criticalGrid}>
+              {overdue.map((eng) => (
+                <div key={eng.id} className={styles.overdueCard}>
+                  <div className={styles.criticalCardHeader}>
+                    <span className={styles.criticalCustomer}>{eng.customerName}</span>
+                    <span className={styles.overdueBadge}>
+                      {eng.daysOver}d overdue
+                    </span>
+                  </div>
+                  <div className={styles.criticalMeta}>
+                    <span>{eng.industry}</span>
+                    <span>&middot;</span>
+                    <span>{eng.engagementType}</span>
+                    <span>&middot;</span>
+                    <span>{eng.owner}</span>
+                  </div>
+                  <div className={styles.criticalProgress}>
+                    <ProgressBar progress={eng.progress} status={eng.status} />
+                  </div>
+                  <div className={styles.overdueDeadline}>
+                    <Clock size={11} />
+                    End date was {formatDate(eng.endDate)} · Status: {eng.status}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className={styles.riskCard}>
-            <h3 className={styles.riskTitle}>
-              <Target size={14} />
-              Health Distribution
-            </h3>
-            <div className={`${styles.riskGrid} ${styles.healthGrid}`}>
-              <div className={`${styles.healthItem} ${styles.healthy}`}>
-                <div className={styles.riskCount}>{healthDistribution.Healthy}</div>
-                <div className={styles.riskLabel}>Healthy</div>
-              </div>
-              <div className={`${styles.healthItem} ${styles.stable}`}>
-                <div className={styles.riskCount}>{healthDistribution.Stable}</div>
-                <div className={styles.riskLabel}>Stable</div>
-              </div>
-              <div className={`${styles.healthItem} ${styles.attention}`}>
-                <div className={styles.riskCount}>{healthDistribution['Needs Attention']}</div>
-                <div className={styles.riskLabel}>Attention</div>
-              </div>
-              <div className={`${styles.healthItem} ${styles.critical}`}>
-                <div className={styles.riskCount}>{healthDistribution.Critical}</div>
-                <div className={styles.riskLabel}>Critical</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
 
         {/* Section 5: Team Capacity */}
         <TeamWorkload engagements={engagements} />
