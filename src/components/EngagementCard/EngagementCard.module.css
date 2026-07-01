@@ -40,6 +40,12 @@
   color: var(--color-text);
 }
 
+.panelSubtitle {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+
 .closeBtn {
   width: 30px;
   height: 30px;

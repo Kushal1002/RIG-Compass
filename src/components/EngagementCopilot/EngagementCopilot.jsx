@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Bot, Send, Sparkles } from 'lucide-react';
+import { Sparkles, Send, Zap } from 'lucide-react';
 import { processCopilotQuery } from '../../utils/copilotEngine';
 import styles from './EngagementCopilot.module.css';
 
@@ -52,12 +52,13 @@ export default function EngagementCopilot({ engagements }) {
       <div className={styles.copilotCard}>
         <div className={styles.copilotHeader}>
           <div className={styles.copilotIcon}>
-            <Bot size={18} />
+            <Sparkles size={18} />
           </div>
           <div className={styles.copilotTitleGroup}>
-            <h2>Engagement Copilot</h2>
+            <h2>Joule</h2>
             <p>AI-powered assistant for your engagement portfolio</p>
           </div>
+          <span className={styles.jouleBadge}>Joule</span>
         </div>
 
         <div className={styles.suggestedChips}>
@@ -76,10 +77,10 @@ export default function EngagementCopilot({ engagements }) {
           {messages.length === 0 && (
             <div className={styles.welcome}>
               <div className={styles.welcomeIcon}>
-                <Sparkles size={24} />
+                <Sparkles size={26} />
               </div>
               <h3>How can I help you today?</h3>
-              <p>Ask about your engagements, risks, workload, or portfolio status.</p>
+              <p>Ask Joule about your engagements, risks, workload, or portfolio status.</p>
             </div>
           )}
 
@@ -92,7 +93,7 @@ export default function EngagementCopilot({ engagements }) {
               ) : (
                 <div className={styles.assistantMessage}>
                   <div className={styles.assistantAvatar}>
-                    <Bot size={14} />
+                    <Sparkles size={12} />
                   </div>
                   <div className={styles.assistantBubble}>{msg.content}</div>
                 </div>
@@ -106,7 +107,7 @@ export default function EngagementCopilot({ engagements }) {
                 <div className={styles.assistantAvatar}>
                   <Bot size={14} />
                 </div>
-                <div className={styles.assistantBubble}>Analyzing portfolio data...</div>
+          <div className={styles.assistantBubble}>Joule is analyzing portfolio data...</div>
               </div>
             </div>
           )}

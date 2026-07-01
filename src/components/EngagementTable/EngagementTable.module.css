@@ -105,6 +105,23 @@
 .customerName {
   font-weight: 600;
   color: var(--color-text);
+  white-space: nowrap;
+}
+
+.projectNameCell {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+  max-width: 260px;
+}
+
+.actionsCell {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.actionsCell .actionBtn + .actionBtn {
+  margin-left: 0.3rem;
 }
 
 .statusBadge {
@@ -247,6 +264,6 @@
   }
 
   .table {
-    min-width: 900px;
+    min-width: 1100px;
   }
 }

@@ -100,47 +100,64 @@
   gap: 0.65rem;
 }
 
-/* Overdue Engagements Section */
-.overdueSection {
+/* Projects at Risk Section */
+.atRiskSection {
   padding: 0 1.5rem 1.25rem;
 }
 
-.overdueCard {
+.atRiskCard {
   background: var(--color-surface);
   border-radius: var(--radius-xl);
   padding: 1.1rem 1.25rem;
   box-shadow: var(--shadow-xs);
   border: 1px solid var(--color-border-light);
-  border-left: 3px solid var(--color-warning);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.overdueCard:hover {
+.atRiskCard.riskHigh {
+  border-left: 3px solid var(--color-danger);
+}
+
+.atRiskCard.riskMedium {
+  border-left: 3px solid var(--color-warning);
+}
+.atRiskCard:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-.overdueBadge {
-  font-size: 0.6rem;
-  font-weight: 700;
-  padding: 0.15rem 0.5rem;
-  border-radius: 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  background: var(--color-warning-light);
+.atRiskCount {
+  font-size: 0.68rem;
+  font-weight: 600;
   color: var(--color-warning);
+  background: var(--color-warning-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
 }
 
-.overdueDeadline {
+.atRiskFooter {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.35rem;
   font-size: 0.72rem;
-  color: var(--color-warning);
-  background: var(--color-warning-light);
   padding: 0.5rem 0.65rem;
   border-radius: var(--radius-sm);
   line-height: 1.4;
+}
+
+.atRiskFooter.high {
+  color: var(--color-danger);
+  background: var(--color-danger-light);
+}
+
+.atRiskFooter.medium {
+  color: var(--color-warning);
+  background: var(--color-warning-light);
+}
+
+.atRiskFooter.low {
+  color: var(--color-success);
+  background: var(--color-success-light);
 }
 
 /* Critical Engagements Section */
@@ -205,6 +222,13 @@
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--color-text);
+}
+
+.criticalProject {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-top: 0.1rem;
 }
 
 .riskBadge {

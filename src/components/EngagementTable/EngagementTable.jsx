@@ -78,8 +78,8 @@ export default function EngagementTable({ engagements, onSelectEngagement, onEdi
         <table className={styles.table}>
           <thead>
             <tr>
-              <th onClick={() => handleSort('customerName')}>Customer <SortIndicator field="customerName" /></th>
-              <th onClick={() => handleSort('industry')}>Industry <SortIndicator field="industry" /></th>
+              <th onClick={() => handleSort('projectName')}>Project / Agent <SortIndicator field="projectName" /></th>
+              <th onClick={() => handleSort('customerName')}>Company <SortIndicator field="customerName" /></th>
               <th onClick={() => handleSort('engagementType')}>Type <SortIndicator field="engagementType" /></th>
               <th onClick={() => handleSort('owner')}>Owner <SortIndicator field="owner" /></th>
               <th onClick={() => handleSort('status')}>Status <SortIndicator field="status" /></th>
@@ -96,8 +96,8 @@ export default function EngagementTable({ engagements, onSelectEngagement, onEdi
               const risk = calculateRiskLevel(eng);
               return (
                 <tr key={eng.id} onClick={() => onSelectEngagement(eng)}>
+                  <td className={styles.projectNameCell}>{eng.projectName || eng.customerName}</td>
                   <td className={styles.customerName}>{eng.customerName}</td>
-                  <td>{eng.industry}</td>
                   <td>{eng.engagementType}</td>
                   <td>{eng.owner}</td>
                   <td>
@@ -116,7 +116,7 @@ export default function EngagementTable({ engagements, onSelectEngagement, onEdi
                   </td>
                   <td>{formatDate(eng.startDate)}</td>
                   <td>{formatDate(eng.endDate)}</td>
-                  <td>
+                  <td className={styles.actionsCell}>
                     <button
                       className={styles.actionBtn}
                       onClick={(e) => { e.stopPropagation(); onSelectEngagement(eng); }}

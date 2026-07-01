@@ -4,23 +4,24 @@
 }
 
 .summaryCard {
-  background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 60%, #0f2040 100%);
+  background: linear-gradient(135deg, #002A86 0%, #0070F2 60%, #1B90FF 100%);
   border-radius: var(--radius-xl);
   padding: 1.75rem 2rem;
   color: white;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 20px rgba(0, 112, 242, 0.25), 0 1px 4px rgba(0, 112, 242, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .summaryCard::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(0, 112, 242, 0.15) 0%, transparent 70%);
+  top: -40%;
+  right: -8%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -29,9 +30,9 @@
   position: absolute;
   bottom: -30%;
   left: -5%;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -50,11 +51,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: white;
 }
 
 .summaryTimestamp {
   font-size: 0.65rem;
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 400;
 }
 
@@ -70,7 +72,7 @@
 .summaryText {
   font-size: 0.82rem;
   line-height: 1.7;
-  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.92);
   max-width: 600px;
 }
 
@@ -98,34 +100,29 @@
   position: relative;
 }
 
-.circleValue::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.1);
-}
-
 .circleValue.healthy {
-  background: rgba(24, 137, 24, 0.2);
-  border: 3px solid rgba(24, 137, 24, 0.6);
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  color: white;
 }
 
 .circleValue.warning {
-  background: rgba(231, 101, 0, 0.2);
-  border: 3px solid rgba(231, 101, 0, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+  border: 3px solid rgba(255, 220, 150, 0.8);
+  color: #FFE9A0;
 }
 
 .circleValue.danger {
-  background: rgba(204, 25, 25, 0.2);
-  border: 3px solid rgba(204, 25, 25, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+  border: 3px solid rgba(255, 160, 160, 0.8);
+  color: #FFB3B3;
 }
 
 .circleLabel {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
 }
 
@@ -142,11 +139,11 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.7rem;
-  opacity: 0.7;
-  padding: 0.3rem 0.6rem;
-  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.3rem 0.7rem;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 @media (max-width: 768px) {
@@ -162,3 +159,4 @@
     justify-content: center;
   }
 }
+

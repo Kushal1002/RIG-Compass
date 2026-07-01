@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import {
   LayoutDashboard, Users, FileText, Settings, Menu,
-  ChevronLeft, Bot
+  ChevronLeft, Sparkles
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, section: 'main' },
   { id: 'engagements', label: 'Engagements', icon: Users, section: 'main', badge: null },
-  { id: 'copilot', label: 'AI Copilot', icon: Bot, section: 'ai' },
+  { id: 'copilot', label: 'Joule', icon: Sparkles, section: 'ai' },
   { id: 'reports', label: 'Reports', icon: FileText, section: 'tools' },
   { id: 'settings', label: 'Settings', icon: Settings, section: 'tools' },
 ];

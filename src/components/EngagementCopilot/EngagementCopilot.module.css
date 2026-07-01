@@ -19,28 +19,44 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  background: linear-gradient(135deg, #002A86 0%, #0070F2 60%, #1B90FF 100%);
 }
 
 .copilotIcon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  flex-shrink: 0;
 }
 
 .copilotTitleGroup h2 {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-text);
+  color: #ffffff;
 }
 
 .copilotTitleGroup p {
   font-size: 0.78rem;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.jouleBadge {
+  margin-left: auto;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .suggestedChips {
@@ -53,20 +69,20 @@
 
 .chip {
   padding: 0.4rem 0.75rem;
-  background: var(--color-neutral-light);
-  border: 1px solid var(--color-border);
+  background: rgba(0, 112, 242, 0.06);
+  border: 1px solid rgba(0, 112, 242, 0.2);
   border-radius: 100px;
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: #0070F2;
   cursor: pointer;
   transition: all var(--transition);
 }
 
 .chip:hover {
-  background: var(--color-primary-light);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  background: rgba(0, 112, 242, 0.14);
+  border-color: #0070F2;
+  color: #002A86;
 }
 
 .chatArea {
@@ -87,7 +103,7 @@
 }
 
 .userBubble {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, #002A86, #0070F2);
   color: white;
   padding: 0.65rem 1rem;
   border-radius: var(--radius-lg) var(--radius-lg) 0 var(--radius-lg);
@@ -104,17 +120,19 @@
 .assistantAvatar {
   width: 28px;
   height: 28px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #0070F2, #1B90FF);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 112, 242, 0.3);
 }
 
 .assistantBubble {
-  background: var(--color-neutral-light);
+  background: rgba(0, 112, 242, 0.05);
+  border: 1px solid rgba(0, 112, 242, 0.12);
   padding: 0.75rem 1rem;
   border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
   max-width: 85%;
@@ -129,7 +147,7 @@
   gap: 0.5rem;
   padding: 1rem 1.5rem;
   border-top: 1px solid var(--color-border);
-  background: var(--color-neutral-light);
+  background: rgba(0, 112, 242, 0.03);
 }
 
 .input {
@@ -144,13 +162,13 @@
 }
 
 .input:focus {
-  border-color: var(--color-primary);
+  border-color: #0070F2;
   box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.1);
 }
 
 .sendBtn {
   padding: 0.7rem 1.25rem;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #002A86, #0070F2);
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -160,11 +178,12 @@
   align-items: center;
   gap: 0.35rem;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .sendBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 112, 242, 0.35);
 }
 
 .sendBtn:disabled {
@@ -185,15 +204,16 @@
 }
 
 .welcomeIcon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #002A86 0%, #0070F2 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 112, 242, 0.3);
 }
 
 .welcome h3 {

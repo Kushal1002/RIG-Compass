@@ -37,7 +37,7 @@
 .kpiCard.active::after { background: var(--color-primary); }
 .kpiCard.completed::after { background: var(--color-success); }
 .kpiCard.blocked::after { background: var(--color-danger); }
-.kpiCard.progress::after { background: var(--color-warning); }
+.kpiCard.golive::after { background: #1B90FF; }
 
 .kpiIcon {
   width: 32px;
@@ -53,7 +53,7 @@
 .kpiIcon.active { background: var(--color-primary-light); color: var(--color-primary); }
 .kpiIcon.completed { background: var(--color-success-light); color: var(--color-success); }
 .kpiIcon.blocked { background: var(--color-danger-light); color: var(--color-danger); }
-.kpiIcon.progress { background: var(--color-warning-light); color: var(--color-warning); }
+.kpiIcon.golive { background: #D1EFFF; color: #1B90FF; }
 
 .kpiValue {
   font-size: 1.6rem;

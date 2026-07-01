@@ -1,4 +1,4 @@
-import { Users, Activity, CheckCircle, AlertTriangle, TrendingUp } from 'lucide-react';
+import { Users, Activity, CheckCircle, AlertTriangle, Rocket } from 'lucide-react';
 import styles from './KPISection.module.css';
 
 export default function KPISection({ engagements }) {
@@ -6,16 +6,14 @@ export default function KPISection({ engagements }) {
   const active = engagements.filter(e => e.status === 'In Progress').length;
   const completed = engagements.filter(e => e.status === 'Completed').length;
   const blocked = engagements.filter(e => e.status === 'Blocked').length;
-  const avgProgress = total > 0
-    ? Math.round(engagements.reduce((sum, e) => sum + e.progress, 0) / total)
-    : 0;
+  const goLive = engagements.filter(e => e.status === 'Completed' && e.progress === 100).length;
 
   const kpis = [
     { label: 'Total Engagements', value: total, type: 'total', icon: Users, trend: '+2 this quarter' },
     { label: 'Active', value: active, type: 'active', icon: Activity, trend: '+1 this month' },
     { label: 'Completed', value: completed, type: 'completed', icon: CheckCircle, trend: '+3 YTD' },
     { label: 'Blocked', value: blocked, type: 'blocked', icon: AlertTriangle, trend: blocked > 0 ? 'Needs attention' : 'None' },
-    { label: 'Avg Progress', value: `${avgProgress}%`, type: 'progress', icon: TrendingUp, trend: '+8% this month' },
+    { label: 'Go Live', value: goLive, type: 'golive', icon: Rocket, trend: `${goLive} customer${goLive !== 1 ? 's' : ''} live` },
   ];
 
   return (

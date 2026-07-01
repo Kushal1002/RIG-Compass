@@ -57,7 +57,10 @@ export default function EngagementCard({ engagement, onClose, onGenerateSummary 
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.panel} onClick={(e) => e.stopPropagation()}>
         <div className={styles.panelHeader}>
-          <h2 className={styles.panelTitle}>{engagement.customerName}</h2>
+          <div>
+            <h2 className={styles.panelTitle}>{engagement.customerName}</h2>
+            {engagement.projectName && <p className={styles.panelSubtitle}>{engagement.projectName}</p>}
+          </div>
           <button className={styles.closeBtn} onClick={onClose}>
             <X size={16} />
           </button>

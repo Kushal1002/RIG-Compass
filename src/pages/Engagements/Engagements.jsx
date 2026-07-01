@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Users, FileText, AlertTriangle, TrendingUp, Activity } from 'lucide-react';
+import { Users, AlertTriangle, Rocket, Activity } from 'lucide-react';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import EngagementTable from '../../components/EngagementTable/EngagementTable';
 import EngagementCard from '../../components/EngagementCard/EngagementCard';
@@ -33,22 +33,25 @@ export default function Engagements({ engagements: allEngagements, onUpdate }) {
 
   const filteredEngagements = useMemo(() => {
     return allEngagements.filter(e => {
-      if (filters.search && !e.customerName.toLowerCase().includes(filters.search.toLowerCase())) return false;
+      if (filters.search) {
+        const q = filters.search.toLowerCase();
+        if (!e.customerName.toLowerCase().includes(q) && !(e.projectName || '').toLowerCase().includes(q)) return false;
+      }
       if (filters.status !== 'All' && e.status !== filters.status) return false;
       if (filters.industry !== 'All' && e.industry !== filters.industry) return false;
       if (filters.type !== 'All' && e.engagementType !== filters.type) return false;
       if (filters.owner !== 'All' && e.owner !== filters.owner) return false;
       return true;
     });
-  }, [filters]);
+  }, [filters, allEngagements]);
 
   const stats = useMemo(() => {
     const active = allEngagements.filter(e => e.status === 'In Progress').length;
     const blocked = allEngagements.filter(e => e.status === 'Blocked').length;
     const highRisk = allEngagements.filter(e => calculateRiskLevel(e) === 'High').length;
-    const avgProgress = Math.round(allEngagements.reduce((s, e) => s + e.progress, 0) / allEngagements.length);
-    return { active, blocked, highRisk, avgProgress };
-  }, []);
+    const goLive = allEngagements.filter(e => e.status === 'Completed' && e.progress === 100).length;
+    return { active, blocked, highRisk, goLive };
+  }, [allEngagements]);
 
   return (
     <div className={styles.page}>
@@ -77,12 +80,12 @@ export default function Engagements({ engagements: allEngagements, onUpdate }) {
           <span><strong>{stats.blocked}</strong> Blocked</span>
         </div>
         <div className={styles.statItem}>
-          <TrendingUp size={13} />
+          <AlertTriangle size={13} />
           <span><strong>{stats.highRisk}</strong> High Risk</span>
         </div>
         <div className={styles.statItem}>
-          <FileText size={13} />
-          <span><strong>{stats.avgProgress}%</strong> Avg Progress</span>
+          <Rocket size={13} />
+          <span><strong>{stats.goLive}</strong> Go Live</span>
         </div>
         <div className={styles.statDivider} />
         <div className={styles.statItem}>

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Sparkles, AlertTriangle, TrendingUp, Clock } from 'lucide-react';
+import { Sparkles, AlertTriangle, TrendingUp, ShieldAlert } from 'lucide-react';
 import Charts from '../../components/Charts/Charts';
 import TeamWorkload from '../../components/TeamWorkload/TeamWorkload';
 import AIInsightsPanel from '../../components/AIInsightsPanel/AIInsightsPanel';
@@ -10,14 +10,14 @@ import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
 import { generateRecommendedActions } from '../../utils/recommendedActionsGenerator';
 import styles from './Dashboard.module.css';
 
-export default function Dashboard({ engagements }) {
+export default function Dashboard({ engagements, isRegional }) {
   const derived = useMemo(() => {
     const ownerCounts = {};
     const industryRisk = {};
     const criticals = [];
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const overdue = [];
+    const atRisk = [];
 
     for (const e of engagements) {
       const risk = calculateRiskLevel(e);
@@ -40,9 +40,9 @@ export default function Dashboard({ engagements }) {
           recommendation: actions[0]?.action || 'Review and escalate',
         });
       }
-      if (endDate < today && e.status !== 'Completed') {
-        const daysOver = Math.ceil((today - endDate) / (1000 * 60 * 60 * 24));
-        overdue.push({ ...e, daysOver });
+      if (risk === 'High' || risk === 'Medium' || e.status === 'Blocked') {
+        const daysToEnd = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+        atRisk.push({ ...e, risk, daysToEnd });
       }
     }
 
@@ -53,6 +53,11 @@ export default function Dashboard({ engagements }) {
     const highRisk = engagements.filter(e => calculateRiskLevel(e) === 'High');
 
     const executiveRecommendations = [];
+    const overdue = engagements.filter(e => {
+      const endDate = new Date(e.endDate);
+      endDate.setHours(0, 0, 0, 0);
+      return endDate < today && e.status !== 'Completed';
+    });
     if (overdue.length > 0) {
       executiveRecommendations.push({ severity: 'critical', text: `${overdue.length} engagement${overdue.length > 1 ? 's are' : ' is'} past the agreed end date — agree revised timelines immediately` });
     }
@@ -73,15 +78,15 @@ export default function Dashboard({ engagements }) {
 
     return {
       criticalEngagements: criticals.slice(0, 5),
-      overdue,
+      atRisk: atRisk.sort((a, b) => {
+        const riskOrder = { High: 0, Medium: 1, Low: 2 };
+        return (riskOrder[a.risk] ?? 3) - (riskOrder[b.risk] ?? 3);
+      }),
       executiveRecommendations,
     };
   }, [engagements]);
 
-  const { criticalEngagements, overdue, executiveRecommendations } = derived;
-
-  const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const { criticalEngagements, atRisk, executiveRecommendations } = derived;
 
   return (
     <div className={styles.dashboard}>
@@ -98,23 +103,26 @@ export default function Dashboard({ engagements }) {
         {/* Section 4: Portfolio Visualizations */}
         <Charts engagements={engagements} />
 
-        {/* Section 4: Overdue Engagements */}
-        {overdue.length > 0 && (
-          <div className={styles.overdueSection}>
+        {/* Section 4: Projects at Risk */}
+        {atRisk.length > 0 && (
+          <div className={styles.atRiskSection}>
             <div className={styles.criticalHeader}>
               <h3 className={styles.criticalTitle}>
-                <Clock size={15} />
-                Overdue Engagements
+                <ShieldAlert size={15} />
+                Projects at Risk
               </h3>
-              <span className={styles.criticalCount}>{overdue.length} past deadline</span>
+              <span className={styles.atRiskCount}>{atRisk.length} project{atRisk.length !== 1 ? 's' : ''} flagged</span>
             </div>
             <div className={styles.criticalGrid}>
-              {overdue.map((eng) => (
-                <div key={eng.id} className={styles.overdueCard}>
+              {atRisk.map((eng) => (
+                <div key={eng.id} className={`${styles.atRiskCard} ${styles[`risk${eng.risk}`]}`}>
                   <div className={styles.criticalCardHeader}>
-                    <span className={styles.criticalCustomer}>{eng.customerName}</span>
-                    <span className={styles.overdueBadge}>
-                      {eng.daysOver}d overdue
+                    <div>
+                      <span className={styles.criticalCustomer}>{eng.customerName}</span>
+                      {eng.projectName && <div className={styles.criticalProject}>{eng.projectName}</div>}
+                    </div>
+                    <span className={`${styles.riskBadge} ${styles[eng.risk.toLowerCase()]}`}>
+                      {eng.risk} Risk
                     </span>
                   </div>
                   <div className={styles.criticalMeta}>
@@ -127,9 +135,13 @@ export default function Dashboard({ engagements }) {
                   <div className={styles.criticalProgress}>
                     <ProgressBar progress={eng.progress} status={eng.status} />
                   </div>
-                  <div className={styles.overdueDeadline}>
-                    <Clock size={11} />
-                    End date was {formatDate(eng.endDate)} · Status: {eng.status}
+                  <div className={`${styles.atRiskFooter} ${styles[eng.risk.toLowerCase()]}`}>
+                    <ShieldAlert size={11} />
+                    {eng.status === 'Blocked'
+                      ? `Blocked — ${eng.blockers || 'requires escalation'}`
+                      : eng.daysToEnd < 0
+                        ? `${Math.abs(eng.daysToEnd)}d past end date · ${eng.progress}% complete`
+                        : `${eng.daysToEnd}d to deadline · ${eng.progress}% complete`}
                   </div>
                 </div>
               ))}
@@ -137,8 +149,8 @@ export default function Dashboard({ engagements }) {
           </div>
         )}
 
-        {/* Section 5: Team Capacity */}
-        <TeamWorkload engagements={engagements} />
+        {/* Section 5: Team Capacity — Regional only */}
+        {isRegional && <TeamWorkload engagements={engagements} />}
 
         {/* Section 6: Critical Engagements */}
         <div className={styles.criticalSection}>
@@ -153,11 +165,14 @@ export default function Dashboard({ engagements }) {
             {criticalEngagements.map((eng) => (
               <div key={eng.id} className={styles.criticalCard}>
                 <div className={styles.criticalCardHeader}>
-                  <span className={styles.criticalCustomer}>{eng.customerName}</span>
-                  <span className={`${styles.riskBadge} ${styles[eng.risk.toLowerCase()]}`}>
-                    {eng.risk} Risk
-                  </span>
-                </div>
+                    <div>
+                      <span className={styles.criticalCustomer}>{eng.customerName}</span>
+                      {eng.projectName && <div className={styles.criticalProject}>{eng.projectName}</div>}
+                    </div>
+                    <span className={`${styles.riskBadge} ${styles[eng.risk.toLowerCase()]}`}>
+                      {eng.risk} Risk
+                    </span>
+                  </div>
                 <div className={styles.criticalMeta}>
                   <span>{eng.industry}</span>
                   <span>&middot;</span>

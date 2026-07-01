@@ -1,36 +1,56 @@
 :root {
-  --color-primary: #0070f2;
-  --color-primary-dark: #0054b6;
-  --color-primary-light: #e8f4fd;
-  --color-primary-hover: #0062d6;
-  --color-success: #188918;
-  --color-success-light: #e6f4e6;
-  --color-warning: #e76500;
-  --color-warning-light: #fef3e6;
-  --color-danger: #cc1919;
-  --color-danger-light: #fce6e6;
-  --color-neutral: #6b7280;
-  --color-neutral-light: #f3f4f6;
-  --color-bg: #f0f2f5;
-  --color-surface: #ffffff;
-  --color-surface-raised: #ffffff;
-  --color-border: #e2e5ea;
-  --color-border-light: #f0f1f3;
-  --color-text: #1a2332;
-  --color-text-secondary: #5b6b7d;
-  --color-text-muted: #8c99a8;
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 40px -8px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+  /* SAP Brand Blues */
+  --sap-blue-2: #D1EFFF;
+  --sap-blue-4: #89D1FF;
+  --sap-blue-6: #1B90FF;
+  --sap-blue-7: #0070F2;
+  --sap-blue-10: #002A86;
+  --sap-blue-11: #00144A;
+
+  /* Primary actions */
+  --color-primary: #0070F2;
+  --color-primary-dark: #002A86;
+  --color-primary-light: #EBF5FF;
+  --color-primary-hover: #1B90FF;
+
+  /* Semantic colours */
+  --color-success: #107E3E;
+  --color-success-light: #F0FAF4;
+  --color-warning: #E76500;
+  --color-warning-light: #FFF5EC;
+  --color-danger: #BB0000;
+  --color-danger-light: #FFF0F0;
+  --color-neutral: #6E8FAB;
+  --color-neutral-light: #F3F6FA;
+
+  /* Surfaces & backgrounds */
+  --color-bg: #F7FBFF;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+
+  /* Borders */
+  --color-border: #C8DCEF;
+  --color-border-light: #E5F0FA;
+
+  /* Text */
+  --color-text: #1D2D44;
+  --color-text-secondary: #3A536B;
+  --color-text-muted: #6E8FAB;
+
+  /* Shadows — blue-tinted to match SAP palette */
+  --shadow-xs: 0 1px 2px rgba(0, 42, 134, 0.06);
+  --shadow-sm: 0 1px 4px rgba(0, 42, 134, 0.08), 0 1px 2px rgba(0, 42, 134, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 42, 134, 0.10), 0 2px 4px rgba(0, 42, 134, 0.06);
+  --shadow-lg: 0 12px 28px rgba(0, 42, 134, 0.12), 0 4px 8px rgba(0, 42, 134, 0.06);
+  --shadow-xl: 0 20px 48px rgba(0, 42, 134, 0.14), 0 8px 16px rgba(0, 42, 134, 0.08);
+
   --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
-  --radius-2xl: 24px;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --font-sans: '72', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --transition-fast: 120ms ease;
   --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);

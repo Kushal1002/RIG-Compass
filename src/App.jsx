@@ -11,28 +11,33 @@ import { useEngagements } from './hooks/useEngagements';
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isRegional, setIsRegional] = useState(false);
   const { engagements, updateEngagement } = useEngagements();
+
+  const visibleEngagements = isRegional
+    ? engagements.filter(e => e.region === 'APJ')
+    : engagements;
 
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
-        return <Dashboard engagements={engagements} />;
+        return <Dashboard engagements={visibleEngagements} isRegional={isRegional} />;
       case 'engagements':
-        return <Engagements engagements={engagements} onUpdate={updateEngagement} />;
+        return <Engagements engagements={visibleEngagements} onUpdate={updateEngagement} />;
       case 'copilot':
-        return <EngagementCopilot engagements={engagements} />;
+        return <EngagementCopilot engagements={visibleEngagements} />;
       case 'reports':
-        return <ExecutiveReport engagements={engagements} />;
+        return <ExecutiveReport engagements={visibleEngagements} />;
       case 'settings':
         return <Settings />;
       default:
-        return <Dashboard engagements={engagements} />;
+        return <Dashboard engagements={visibleEngagements} isRegional={isRegional} />;
     }
   };
 
   return (
     <div className="app-layout">
-      <Header />
+      <Header isRegional={isRegional} onToggleRegion={() => setIsRegional(r => !r)} />
       <div className="app-body">
         <Sidebar
           activePage={activePage}
