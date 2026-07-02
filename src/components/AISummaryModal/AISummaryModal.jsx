@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Sparkles, Clock, Building2 } from 'lucide-react';
+import { X, Clock, Building2 } from 'lucide-react';
 import { generateAISummary } from '../../utils/aiSummaryGenerator';
 import styles from './AISummaryModal.module.css';
 
@@ -28,7 +28,7 @@ export default function AISummaryModal({ engagement, onClose }) {
         <div className={styles.modalHeader}>
           <div className={styles.modalTitle}>
             <div className={styles.modalIcon}>
-              <Sparkles size={14} />
+              <img src="/301102_ai_white.png" alt="Joule" style={{ width: 14, height: 14, objectFit: 'contain' }} />
             </div>
             AI Engagement Summary
           </div>
@@ -61,7 +61,7 @@ export default function AISummaryModal({ engagement, onClose }) {
                   Generated {new Date().toLocaleTimeString()}
                 </span>
                 <span className={styles.metaItem}>
-                  <Sparkles size={12} />
+                  <img src="/301102_ai_white.png" alt="Joule" style={{ width: 12, height: 12, objectFit: 'contain' }} />
                   AI-powered analysis
                 </span>
               </div>

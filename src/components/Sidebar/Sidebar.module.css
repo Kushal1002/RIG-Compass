@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   padding: 0.75rem 0;
+  padding-top: 2rem;
   z-index: 90;
   transition: width var(--transition-slow);
   overflow-x: visible;
@@ -23,9 +24,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-text-muted);
@@ -35,7 +36,7 @@
   z-index: 10;
   cursor: pointer;
   transition: all var(--transition);
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-sm);
 }
 
 .collapseBtn:hover {
@@ -117,6 +118,21 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.jouleNavIcon {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+  /* Dark gray to match other nav icons */
+  filter: brightness(0) saturate(100%) invert(35%);
+  transition: filter var(--transition);
+}
+
+.navLink:hover .jouleNavIcon,
+.navLink.active .jouleNavIcon {
+  /* Match --color-primary (#0070F2) */
+  filter: invert(27%) sepia(97%) saturate(1600%) hue-rotate(204deg) brightness(102%) contrast(103%);
 }
 
 .navLabel {

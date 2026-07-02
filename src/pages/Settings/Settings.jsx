@@ -9,7 +9,7 @@ export default function Settings() {
         <div className={styles.settingItem}>
           <div>
             <div className={styles.settingLabel}>Application Version</div>
-            <div className={styles.settingDesc}>RIG Engagement Tracker v2.0</div>
+            <div className={styles.settingDesc}>RIG Project Tooling v2.0</div>
           </div>
         </div>
 

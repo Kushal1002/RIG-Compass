@@ -1,14 +1,12 @@
-import { useMemo } from 'react';
-import { FileText, Download, Clock } from 'lucide-react';
-import { generateExecutiveReport, downloadReport } from '../../utils/executiveReportGenerator';
+import { FileText, Clock, Presentation } from 'lucide-react';
 import styles from './ExecutiveReport.module.css';
 
-export default function ExecutiveReport({ engagements }) {
-  const report = useMemo(() => generateExecutiveReport(engagements), [engagements]);
-
-  const handleDownload = () => {
-    const date = new Date().toISOString().split('T')[0];
-    downloadReport(report, `RIG_Executive_Report_${date}.txt`);
+export default function ExecutiveReport() {
+  const handleDownloadPpt = () => {
+    const a = document.createElement('a');
+    a.href = '/SAP_RIG_Portfolio.pptx';
+    a.download = 'SAP_RIG_Portfolio.pptx';
+    a.click();
   };
 
   return (
@@ -20,26 +18,24 @@ export default function ExecutiveReport({ engagements }) {
               <FileText size={18} />
             </div>
             <div className={styles.reportTitleGroup}>
-              <h2>Executive Report Generator</h2>
-              <p>Auto-generated leadership summary</p>
+              <h2>Executive Report</h2>
+              <p>SAP RIG Portfolio Presentation</p>
             </div>
           </div>
-          <button className={styles.downloadBtn} onClick={handleDownload}>
-            <Download size={14} />
-            Download Report
-          </button>
-        </div>
-
-        <div className={styles.reportPreview}>
-          <div className={styles.reportContent}>{report}</div>
+          <div className={styles.downloadGroup}>
+            <button className={styles.downloadBtnPpt} onClick={handleDownloadPpt}>
+              <Presentation size={14} />
+              Download PPT
+            </button>
+          </div>
         </div>
 
         <div className={styles.reportMeta}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <Clock size={12} />
-            Generated: {new Date().toLocaleString()}
+            {new Date().toLocaleString()}
           </span>
-          <span>Format: Plain Text (.txt)</span>
+          <span>Format: PowerPoint (.pptx)</span>
         </div>
       </div>
     </div>

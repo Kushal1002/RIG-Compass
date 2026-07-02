@@ -80,7 +80,6 @@ export default function EngagementTable({ engagements, onSelectEngagement, onEdi
             <tr>
               <th onClick={() => handleSort('projectName')}>Project / Agent <SortIndicator field="projectName" /></th>
               <th onClick={() => handleSort('customerName')}>Company <SortIndicator field="customerName" /></th>
-              <th onClick={() => handleSort('engagementType')}>Type <SortIndicator field="engagementType" /></th>
               <th onClick={() => handleSort('owner')}>Owner <SortIndicator field="owner" /></th>
               <th onClick={() => handleSort('status')}>Status <SortIndicator field="status" /></th>
               <th onClick={() => handleSort('progress')}>Progress <SortIndicator field="progress" /></th>
@@ -98,7 +97,6 @@ export default function EngagementTable({ engagements, onSelectEngagement, onEdi
                 <tr key={eng.id} onClick={() => onSelectEngagement(eng)}>
                   <td className={styles.projectNameCell}>{eng.projectName || eng.customerName}</td>
                   <td className={styles.customerName}>{eng.customerName}</td>
-                  <td>{eng.engagementType}</td>
                   <td>{eng.owner}</td>
                   <td>
                     <span className={`${styles.statusBadge} ${getStatusClass(eng.status)}`}>

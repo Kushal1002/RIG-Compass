@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 96.21 96.21">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Nouvelle_nuance_de_dégradé_1);
+        fill-opacity: 0;
+      }
+
+      .cls-2 {
+        fill: url(#Nouvelle_nuance_de_dégradé_1-2);
+      }
+    </style>
+    <linearGradient id="Nouvelle_nuance_de_dégradé_1" data-name="Nouvelle nuance de dégradé 1" x1="48.11" y1="0" x2="48.11" y2="93.72" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5d36ff"/>
+      <stop offset="1" stop-color="#a100c2"/>
+    </linearGradient>
+    <linearGradient id="Nouvelle_nuance_de_dégradé_1-2" data-name="Nouvelle nuance de dégradé 1" x1="48.1" y1="0" x2="48.1" y2="93.72" xlink:href="#Nouvelle_nuance_de_dégradé_1"/>
+  </defs>
+  <g id="Icons_16px" data-name="Icons 16px">
+    <g id="da-2">
+      <rect class="cls-1" x="0" width="96.21" height="96.21"/>
+      <path class="cls-2" d="M95.37,28.56L77.33,2.1c-.9-1.31-2.38-2.1-3.97-2.1H25.26c-1.49,0-2.9.69-3.81,1.87L1,28.33c-1.3,1.69-1.34,4.02-.1,5.75l43.29,60.13c.9,1.26,2.36,2,3.91,2s3-.74,3.91-2l43.29-60.13c1.18-1.64,1.21-3.85.07-5.52ZM70.74,35.07c-6.52,2.2-9.42,5.1-11.63,11.62-.64,1.89-3.33,1.89-3.97,0-2.21-6.52-5.1-9.42-11.63-11.62-1.89-.64-1.89-3.35,0-3.99,6.52-2.2,9.42-5.1,11.63-11.62.64-1.89,3.33-1.89,3.97,0,2.21,6.52,5.1,9.42,11.63,11.62,1.89.64,1.89,3.35,0,3.99Z"/>
+    </g>
+  </g>
+</svg>

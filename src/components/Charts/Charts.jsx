@@ -12,10 +12,9 @@ const STATUS_COLORS = {
   'Completed': '#188918'
 };
 
-const TYPE_COLORS = ['#0070f2', '#6366f1', '#0891b2', '#e76500', '#188918'];
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default function Charts({ engagements }) {
-  // Status pie chart data
   const statusData = Object.entries(
     engagements.reduce((acc, e) => {
       acc[e.status] = (acc[e.status] || 0) + 1;
@@ -23,14 +22,17 @@ export default function Charts({ engagements }) {
     }, {})
   ).map(([name, value]) => ({ name, value }));
 
-  // Type bar chart data
-  const typeData = Object.entries(
-    engagements.reduce((acc, e) => {
-      const type = e.engagementType === 'SAP BTP Architecture' ? 'Architecture' : e.engagementType;
-      acc[type] = (acc[type] || 0) + 1;
-      return acc;
-    }, {})
-  ).map(([name, count]) => ({ name, count }));
+  // Timeline: count projects ending each month
+  const timelineMap = {};
+  engagements.forEach(e => {
+    if (!e.endDate) return;
+    const d = new Date(e.endDate);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const label = `${MONTH_NAMES[d.getMonth()]} '${String(d.getFullYear()).slice(2)}`;
+    if (!timelineMap[key]) timelineMap[key] = { key, label, ending: 0 };
+    timelineMap[key].ending += 1;
+  });
+  const timelineData = Object.values(timelineMap).sort((a, b) => a.key.localeCompare(b.key));
 
   return (
     <section className={styles.chartsSection}>
@@ -53,50 +55,26 @@ export default function Charts({ engagements }) {
               ))}
             </Pie>
             <Tooltip
-              contentStyle={{
-                borderRadius: '8px',
-                border: '1px solid #e5e7eb',
-                fontSize: '0.8rem'
-              }}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.8rem' }}
             />
-            <Legend
-              iconSize={8}
-              wrapperStyle={{ fontSize: '0.75rem' }}
-            />
+            <Legend iconSize={8} wrapperStyle={{ fontSize: '0.75rem' }} />
           </PieChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Type Bar Chart */}
+      {/* Timeline Overview */}
       <div className={styles.chartCard}>
-        <h3 className={styles.chartTitle}>By Engagement Type</h3>
+        <h3 className={styles.chartTitle}>Timeline Overview</h3>
         <ResponsiveContainer width="100%" height={220}>
-          <BarChart data={typeData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
+          <BarChart data={timelineData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis
-              dataKey="name"
-              tick={{ fontSize: 10 }}
-              tickLine={false}
-              axisLine={{ stroke: '#e5e7eb' }}
-            />
-            <YAxis
-              tick={{ fontSize: 11 }}
-              tickLine={false}
-              axisLine={{ stroke: '#e5e7eb' }}
-              allowDecimals={false}
-            />
+            <XAxis dataKey="label" tick={{ fontSize: 10 }} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} />
+            <YAxis tick={{ fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} allowDecimals={false} />
             <Tooltip
-              contentStyle={{
-                borderRadius: '8px',
-                border: '1px solid #e5e7eb',
-                fontSize: '0.8rem'
-              }}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.8rem' }}
+              formatter={(value) => [value, 'Projects ending']}
             />
-            <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-              {typeData.map((_, index) => (
-                <Cell key={index} fill={TYPE_COLORS[index % TYPE_COLORS.length]} />
-              ))}
-            </Bar>
+            <Bar dataKey="ending" radius={[4, 4, 0, 0]} fill="#0070F2" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -107,25 +85,10 @@ export default function Charts({ engagements }) {
         <ResponsiveContainer width="100%" height={220}>
           <LineChart data={monthlyProgressData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis
-              dataKey="month"
-              tick={{ fontSize: 11 }}
-              tickLine={false}
-              axisLine={{ stroke: '#e5e7eb' }}
-            />
-            <YAxis
-              tick={{ fontSize: 11 }}
-              tickLine={false}
-              axisLine={{ stroke: '#e5e7eb' }}
-              domain={[0, 100]}
-              unit="%"
-            />
+            <XAxis dataKey="month" tick={{ fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} />
+            <YAxis tick={{ fontSize: 11 }} tickLine={false} axisLine={{ stroke: '#e5e7eb' }} domain={[0, 100]} unit="%" />
             <Tooltip
-              contentStyle={{
-                borderRadius: '8px',
-                border: '1px solid #e5e7eb',
-                fontSize: '0.8rem'
-              }}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.8rem' }}
               formatter={(value) => [`${value}%`, 'Avg Progress']}
             />
             <Line

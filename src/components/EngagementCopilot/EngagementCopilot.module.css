@@ -19,31 +19,36 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, #002A86 0%, #0070F2 60%, #1B90FF 100%);
+  background: linear-gradient(180deg, #B994FF 0%, #ffffff 100%);
 }
 
 .copilotIcon {
   width: 38px;
   height: 38px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   flex-shrink: 0;
+}
+
+.jouleIcon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
 }
 
 .copilotTitleGroup h2 {
   font-size: 1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #3B0099;
 }
 
 .copilotTitleGroup p {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(59, 0, 153, 0.6);
 }
 
 .jouleBadge {
@@ -54,9 +59,9 @@
   text-transform: uppercase;
   padding: 0.2rem 0.65rem;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(59, 0, 153, 0.1);
+  color: #3B0099;
+  border: 1px solid rgba(59, 0, 153, 0.2);
 }
 
 .suggestedChips {
@@ -69,20 +74,20 @@
 
 .chip {
   padding: 0.4rem 0.75rem;
-  background: rgba(0, 112, 242, 0.06);
-  border: 1px solid rgba(0, 112, 242, 0.2);
+  background: rgba(185, 148, 255, 0.1);
+  border: 1px solid rgba(185, 148, 255, 0.35);
   border-radius: 100px;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #0070F2;
+  color: #6B21C8;
   cursor: pointer;
   transition: all var(--transition);
 }
 
 .chip:hover {
-  background: rgba(0, 112, 242, 0.14);
-  border-color: #0070F2;
-  color: #002A86;
+  background: rgba(185, 148, 255, 0.22);
+  border-color: #B994FF;
+  color: #3B0099;
 }
 
 .chatArea {
@@ -103,7 +108,7 @@
 }
 
 .userBubble {
-  background: linear-gradient(135deg, #002A86, #0070F2);
+  background: linear-gradient(180deg, #B994FF, #7C3AED);
   color: white;
   padding: 0.65rem 1rem;
   border-radius: var(--radius-lg) var(--radius-lg) 0 var(--radius-lg);
@@ -120,19 +125,18 @@
 .assistantAvatar {
   width: 28px;
   height: 28px;
-  background: linear-gradient(135deg, #0070F2, #1B90FF);
+  background: linear-gradient(180deg, #B994FF, #7C3AED);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(0, 112, 242, 0.3);
+  box-shadow: 0 1px 4px rgba(185, 148, 255, 0.4);
 }
 
 .assistantBubble {
-  background: rgba(0, 112, 242, 0.05);
-  border: 1px solid rgba(0, 112, 242, 0.12);
+  background: rgba(185, 148, 255, 0.07);
+  border: 1px solid rgba(185, 148, 255, 0.2);
   padding: 0.75rem 1rem;
   border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
   max-width: 85%;
@@ -147,7 +151,7 @@
   gap: 0.5rem;
   padding: 1rem 1.5rem;
   border-top: 1px solid var(--color-border);
-  background: rgba(0, 112, 242, 0.03);
+  background: rgba(185, 148, 255, 0.04);
 }
 
 .input {
@@ -162,13 +166,13 @@
 }
 
 .input:focus {
-  border-color: #0070F2;
-  box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.1);
+  border-color: #B994FF;
+  box-shadow: 0 0 0 3px rgba(185, 148, 255, 0.15);
 }
 
 .sendBtn {
   padding: 0.7rem 1.25rem;
-  background: linear-gradient(135deg, #002A86, #0070F2);
+  background: linear-gradient(180deg, #B994FF, #7C3AED);
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -183,7 +187,7 @@
 
 .sendBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 112, 242, 0.35);
+  box-shadow: 0 4px 12px rgba(185, 148, 255, 0.45);
 }
 
 .sendBtn:disabled {
@@ -206,14 +210,13 @@
 .welcomeIcon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #002A86 0%, #0070F2 100%);
+  background: linear-gradient(180deg, #B994FF 0%, #7C3AED 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 16px rgba(0, 112, 242, 0.3);
+  box-shadow: 0 4px 16px rgba(185, 148, 255, 0.4);
 }
 
 .welcome h3 {

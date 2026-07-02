@@ -8,7 +8,7 @@ export default function Header({ isRegional, onToggleRegion }) {
           <img src="/SAP_R_grad_scrn.png" alt="SAP" className={styles.sapLogo} />
         </div>
         <div className={styles.titleGroup}>
-          <h1 className={styles.title}>RIG Engagement Tracker</h1>
+          <h1 className={styles.title}>RIG Project Tooling</h1>
         </div>
       </div>
       <div className={styles.headerRight}>

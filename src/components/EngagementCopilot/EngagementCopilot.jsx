@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Sparkles, Send, Zap } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { processCopilotQuery } from '../../utils/copilotEngine';
 import styles from './EngagementCopilot.module.css';
 
@@ -7,10 +7,14 @@ const SUGGESTED_QUESTIONS = [
   { label: 'Blocked Projects', query: 'What projects are blocked?' },
   { label: 'High Risk', query: 'Which engagement is most at risk?' },
   { label: 'Team Workload', query: 'Who has the highest workload?' },
-  { label: 'Business AI', query: 'Show Business AI projects' },
   { label: 'Near Completion', query: 'Which projects are near completion?' },
   { label: 'Needs Attention', query: 'What needs attention this week?' },
 ];
+
+const formatContent = (text) =>
+  text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
+    i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+  );
 
 export default function EngagementCopilot({ engagements }) {
   const [messages, setMessages] = useState([]);
@@ -51,14 +55,11 @@ export default function EngagementCopilot({ engagements }) {
     <div className={styles.copilotPage}>
       <div className={styles.copilotCard}>
         <div className={styles.copilotHeader}>
-          <div className={styles.copilotIcon}>
-            <Sparkles size={18} />
-          </div>
+          <img src="/301104_301104_joule_gradient.svg" alt="Joule" className={styles.jouleIcon} />
           <div className={styles.copilotTitleGroup}>
-            <h2>Joule</h2>
+            <h2>Joule Work</h2>
             <p>AI-powered assistant for your engagement portfolio</p>
           </div>
-          <span className={styles.jouleBadge}>Joule</span>
         </div>
 
         <div className={styles.suggestedChips}>
@@ -77,7 +78,7 @@ export default function EngagementCopilot({ engagements }) {
           {messages.length === 0 && (
             <div className={styles.welcome}>
               <div className={styles.welcomeIcon}>
-                <Sparkles size={26} />
+                <img src="/301104_da-2_white.png" alt="Joule" style={{ width: 30, height: 30, objectFit: 'contain' }} />
               </div>
               <h3>How can I help you today?</h3>
               <p>Ask Joule about your engagements, risks, workload, or portfolio status.</p>
@@ -92,10 +93,10 @@ export default function EngagementCopilot({ engagements }) {
                 </div>
               ) : (
                 <div className={styles.assistantMessage}>
-                  <div className={styles.assistantAvatar}>
-                    <Sparkles size={12} />
+                <div className={styles.assistantAvatar}>
+                    <img src="/301104_da-2_white.png" alt="Joule" style={{ width: 14, height: 14, objectFit: 'contain' }} />
                   </div>
-                  <div className={styles.assistantBubble}>{msg.content}</div>
+                  <div className={styles.assistantBubble}>{formatContent(msg.content)}</div>
                 </div>
               )}
             </div>
@@ -105,7 +106,7 @@ export default function EngagementCopilot({ engagements }) {
             <div className={styles.message}>
               <div className={styles.assistantMessage}>
                 <div className={styles.assistantAvatar}>
-                  <Bot size={14} />
+                  <img src="/301104_da-2_white.png" alt="Joule" style={{ width: 14, height: 14, objectFit: 'contain' }} />
                 </div>
           <div className={styles.assistantBubble}>Joule is analyzing portfolio data...</div>
               </div>

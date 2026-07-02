@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Sparkles, AlertTriangle, TrendingUp, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, TrendingUp, ShieldAlert } from 'lucide-react';
 import Charts from '../../components/Charts/Charts';
 import TeamWorkload from '../../components/TeamWorkload/TeamWorkload';
 import AIInsightsPanel from '../../components/AIInsightsPanel/AIInsightsPanel';
@@ -128,8 +128,6 @@ export default function Dashboard({ engagements, isRegional }) {
                   <div className={styles.criticalMeta}>
                     <span>{eng.industry}</span>
                     <span>&middot;</span>
-                    <span>{eng.engagementType}</span>
-                    <span>&middot;</span>
                     <span>{eng.owner}</span>
                   </div>
                   <div className={styles.criticalProgress}>
@@ -152,55 +150,11 @@ export default function Dashboard({ engagements, isRegional }) {
         {/* Section 5: Team Capacity — Regional only */}
         {isRegional && <TeamWorkload engagements={engagements} />}
 
-        {/* Section 6: Critical Engagements */}
-        <div className={styles.criticalSection}>
-          <div className={styles.criticalHeader}>
-            <h3 className={styles.criticalTitle}>
-              <AlertTriangle size={15} />
-              Critical Engagements Requiring Attention
-            </h3>
-            <span className={styles.criticalCount}>{criticalEngagements.length} flagged</span>
-          </div>
-          <div className={styles.criticalGrid}>
-            {criticalEngagements.map((eng) => (
-              <div key={eng.id} className={styles.criticalCard}>
-                <div className={styles.criticalCardHeader}>
-                    <div>
-                      <span className={styles.criticalCustomer}>{eng.customerName}</span>
-                      {eng.projectName && <div className={styles.criticalProject}>{eng.projectName}</div>}
-                    </div>
-                    <span className={`${styles.riskBadge} ${styles[eng.risk.toLowerCase()]}`}>
-                      {eng.risk} Risk
-                    </span>
-                  </div>
-                <div className={styles.criticalMeta}>
-                  <span>{eng.industry}</span>
-                  <span>&middot;</span>
-                  <span>{eng.engagementType}</span>
-                  <span>&middot;</span>
-                  <span>{eng.owner}</span>
-                </div>
-                <div className={styles.criticalProgress}>
-                  <ProgressBar progress={eng.progress} status={eng.status} />
-                </div>
-                <div className={styles.criticalReason}>
-                  <AlertTriangle size={11} />
-                  {eng.reason}
-                </div>
-                <div className={styles.criticalAction}>
-                  <TrendingUp size={11} />
-                  <strong>Action:</strong> {eng.recommendation}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Section 7: Executive Recommendations */}
         <div className={styles.recommendationsSection}>
           <div className={styles.recCard}>
             <h3 className={styles.recTitle}>
-              <Sparkles size={15} />
+              <img src="/301102_ai_white.png" alt="Joule" style={{ width: 15, height: 15, objectFit: 'contain' }} />
               Executive Recommendations
             </h3>
             <div className={styles.recList}>

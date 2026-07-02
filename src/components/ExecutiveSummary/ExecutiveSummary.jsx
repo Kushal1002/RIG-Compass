@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Sparkles, Shield, Heart, TrendingUp } from 'lucide-react';
+import { Shield, Heart, TrendingUp } from 'lucide-react';
 import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
 import { calculateHealthScore } from '../../utils/healthScore';
 import styles from './ExecutiveSummary.module.css';
@@ -52,7 +52,7 @@ export default function ExecutiveSummary({ engagements }) {
       <div className={styles.summaryCard}>
         <div className={styles.summaryHeader}>
           <h2 className={styles.summaryTitle}>
-            <Sparkles size={16} />
+            <img src="/301102_ai_white.png" alt="AI" style={{ width: 16, height: 16, objectFit: 'contain' }} />
             Executive Portfolio Summary
           </h2>
           <span className={styles.summaryTimestamp}>

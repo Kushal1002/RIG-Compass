@@ -1,4 +1,4 @@
-import { X, Sparkles, Check } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import HealthBadge from '../HealthBadge/HealthBadge';
 import { calculateRiskLevel, getPhase } from '../../utils/aiSummaryGenerator';
@@ -180,7 +180,7 @@ export default function EngagementCard({ engagement, onClose, onGenerateSummary 
           {/* AI Summary Button */}
           <div className={styles.section}>
             <button className={styles.aiBtn} onClick={() => onGenerateSummary(engagement)}>
-              <Sparkles size={15} />
+              <img src="/301102_ai_white.png" alt="Joule" style={{ width: 15, height: 15, objectFit: 'contain' }} />
               Generate AI Summary
             </button>
           </div>
