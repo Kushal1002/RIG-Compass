@@ -5,47 +5,59 @@
 
 .workloadCard {
   background: var(--color-surface);
-  border-radius: var(--radius-xl);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-xs);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-light);
+  overflow: hidden;
 }
 
 .workloadHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .workloadTitle {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .metricsRow {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.65rem;
-  margin-bottom: 1.15rem;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .metricBox {
-  padding: 0.7rem;
-  background: var(--color-bg);
-  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
   text-align: center;
-  border: 1px solid var(--color-border-light);
+  border-right: 1px solid var(--color-border-light);
+}
+
+.metricBox:last-child {
+  border-right: none;
 }
 
 .metricValue {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .metricLabel {
@@ -58,14 +70,15 @@
 }
 
 .chartContainer {
-  height: 200px;
+  height: 240px;
+  padding: 1rem 1rem 0.5rem;
 }
 
 .statusBadge {
   display: inline-flex;
   padding: 0.15rem 0.5rem;
   border-radius: 100px;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
 }
 
@@ -85,11 +98,9 @@
 }
 
 @media (max-width: 768px) {
-  .workloadSection {
-    padding: 0 1rem 1rem;
-  }
-
-  .metricsRow {
-    grid-template-columns: 1fr;
-  }
+  .workloadSection { padding: 0 1rem 1rem; }
+  .metricsRow { grid-template-columns: 1fr; }
+  .metricBox { border-right: none; border-bottom: 1px solid var(--color-border-light); }
+  .metricBox:last-child { border-bottom: none; }
+  .legendRow { display: none; }
 }

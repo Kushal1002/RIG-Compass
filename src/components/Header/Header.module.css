@@ -21,6 +21,22 @@
   gap: 0.85rem;
 }
 
+.logoBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--radius-md);
+  transition: opacity var(--transition);
+}
+
+.logoBtn:hover {
+  opacity: 0.8;
+}
+
 .logo {
   height: 34px;
   width: auto;

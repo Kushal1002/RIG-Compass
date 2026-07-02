@@ -1,4 +1,4 @@
-import { FileText, Clock, Presentation } from 'lucide-react';
+import { Clock, Presentation } from 'lucide-react';
 import styles from './ExecutiveReport.module.css';
 
 export default function ExecutiveReport() {
@@ -15,7 +15,7 @@ export default function ExecutiveReport() {
         <div className={styles.reportHeader}>
           <div className={styles.reportHeaderLeft}>
             <div className={styles.reportIcon}>
-              <FileText size={18} />
+              <img src="/299078_manager-insight_blue.svg" alt="Reports" style={{ width: 20, height: 20, objectFit: 'contain' }} />
             </div>
             <div className={styles.reportTitleGroup}>
               <h2>Executive Report</h2>

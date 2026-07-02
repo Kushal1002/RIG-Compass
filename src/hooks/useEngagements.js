@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { engagements as mockData } from '../data/engagements';
 
-const STORAGE_KEY = 'rig_engagements';
-const SEED_VERSION = mockData.map(e => [e.id, e.customerName, e.projectName, e.region, e.industry].join(':')).join('|');
-const VERSION_KEY = 'rig_engagements_version';
+const STORAGE_KEY = 'rig_engagements_v3';
+const SEED_VERSION = mockData.map(e => [e.id, e.customerName, e.projectName, e.region, e.industry, e.owner, e.status].join(':')).join('|');
+const VERSION_KEY = 'rig_engagements_version_v3';
 
 function load() {
   try {
@@ -13,6 +13,8 @@ function load() {
   } catch {
     // corrupted storage — fall back to mock data
   }
+  // clear any stale keys
+  Object.keys(localStorage).filter(k => k.startsWith('rig_')).forEach(k => localStorage.removeItem(k));
   return mockData;
 }
 

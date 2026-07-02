@@ -107,20 +107,17 @@
 
 .atRiskCard {
   background: var(--color-surface);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   padding: 1.1rem 1.25rem;
-  box-shadow: var(--shadow-xs);
   border: 1px solid var(--color-border-light);
+  border-left: 4px solid transparent;
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.atRiskCard.riskHigh {
-  border-left: 3px solid var(--color-danger);
-}
+.atRiskCard.riskHigh   { border-left-color: var(--color-danger); }
+.atRiskCard.riskMedium { border-left-color: var(--color-warning); }
+.atRiskCard.riskLow    { border-left-color: var(--color-success); }
 
-.atRiskCard.riskMedium {
-  border-left: 3px solid var(--color-warning);
-}
 .atRiskCard:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
@@ -145,20 +142,9 @@
   line-height: 1.4;
 }
 
-.atRiskFooter.high {
-  color: var(--color-danger);
-  background: var(--color-danger-light);
-}
-
-.atRiskFooter.medium {
-  color: var(--color-warning);
-  background: var(--color-warning-light);
-}
-
-.atRiskFooter.low {
-  color: var(--color-success);
-  background: var(--color-success-light);
-}
+.atRiskFooter.high   { color: var(--color-danger);  background: var(--color-danger-light); }
+.atRiskFooter.medium { color: var(--color-warning); background: var(--color-warning-light); }
+.atRiskFooter.low    { color: var(--color-success); background: var(--color-success-light); }
 
 /* Critical Engagements Section */
 .criticalSection {
@@ -173,12 +159,14 @@
 }
 
 .criticalTitle {
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .criticalCount {

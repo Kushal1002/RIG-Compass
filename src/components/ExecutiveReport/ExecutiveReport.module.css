@@ -30,12 +30,11 @@
 .reportIcon {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #0070f2, #0054b6);
+  background: var(--color-primary-light);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
 }
 
 .reportTitleGroup h2 {

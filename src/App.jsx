@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="app-layout">
-      <Header isRegional={isRegional} onToggleRegion={() => setIsRegional(r => !r)} />
+      <Header isRegional={isRegional} onToggleRegion={() => setIsRegional(r => !r)} onNavigate={setActivePage} />
       <div className="app-body">
         <Sidebar
           activePage={activePage}

@@ -5,80 +5,70 @@
 
 .insightsCard {
   background: var(--color-surface);
-  border-radius: var(--radius-xl);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-xs);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-light);
+  overflow: hidden;
 }
 
 .insightsTitle {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--color-border-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .insightsList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.65rem;
+  gap: 0;
 }
 
 .insightItem {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
-  padding: 0.75rem;
-  background: var(--color-bg);
-  border-radius: var(--radius-md);
-  border-left: 3px solid var(--color-border-light);
-  transition: all var(--transition);
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background var(--transition);
+}
+
+.insightItem:nth-child(odd) {
+  border-right: 1px solid var(--color-border-light);
+}
+
+.insightItem:nth-last-child(-n+2) {
+  border-bottom: none;
 }
 
 .insightItem:hover {
-  box-shadow: var(--shadow-xs);
-  transform: translateX(2px);
+  background: var(--color-bg);
 }
 
-.insightItem.high {
-  border-left-color: var(--color-danger);
-}
-
-.insightItem.medium {
-  border-left-color: var(--color-warning);
-}
-
-.insightItem.low {
-  border-left-color: var(--color-success);
-}
+.insightItem.high   { border-left-color: var(--color-danger); }
+.insightItem.medium { border-left-color: var(--color-warning); }
+.insightItem.low    { border-left-color: var(--color-success); }
 
 .insightIcon {
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  margin-top: 0.1rem;
 }
 
-.insightIcon.high {
-  background: var(--color-danger-light);
-  color: var(--color-danger);
-}
-
-.insightIcon.medium {
-  background: var(--color-warning-light);
-  color: var(--color-warning);
-}
-
-.insightIcon.low {
-  background: var(--color-success-light);
-  color: var(--color-success);
-}
+.insightIcon.high   { background: var(--color-danger-light);  color: var(--color-danger); }
+.insightIcon.medium { background: var(--color-warning-light); color: var(--color-warning); }
+.insightIcon.low    { background: var(--color-success-light); color: var(--color-success); }
 
 .insightContent {
   flex: 1;
@@ -88,52 +78,39 @@
 .insightText {
   font-size: 0.78rem;
   color: var(--color-text);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .insightMeta {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
 }
 
 .impactBadge {
   font-size: 0.6rem;
   font-weight: 700;
-  padding: 0.12rem 0.4rem;
+  padding: 0.1rem 0.45rem;
   border-radius: 100px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
-.impactBadge.high {
-  background: var(--color-danger-light);
-  color: var(--color-danger);
-}
+.impactBadge.high   { background: var(--color-danger-light);  color: var(--color-danger); }
+.impactBadge.medium { background: var(--color-warning-light); color: var(--color-warning); }
+.impactBadge.low    { background: var(--color-success-light); color: var(--color-success); }
 
-.impactBadge.medium {
-  background: var(--color-warning-light);
-  color: var(--color-warning);
-}
-
-.impactBadge.low {
-  background: var(--color-success-light);
-  color: var(--color-success);
-}
-
-.insightCategory {
+.categoryTag {
   font-size: 0.62rem;
   color: var(--color-text-muted);
   font-weight: 500;
 }
 
 @media (max-width: 1024px) {
-  .insightsSection {
-    padding: 0 1rem 1rem;
-  }
-
-  .insightsList {
-    grid-template-columns: 1fr;
-  }
+  .insightsSection { padding: 0 1rem 1rem; }
+  .insightsList { grid-template-columns: 1fr; }
+  .insightItem:nth-child(odd) { border-right: none; }
+  .insightItem:nth-last-child(-n+2) { border-bottom: 1px solid var(--color-border-light); }
+  .insightItem:last-child { border-bottom: none; }
 }

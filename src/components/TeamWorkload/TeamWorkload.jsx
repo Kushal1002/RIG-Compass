@@ -10,9 +10,9 @@ function getWorkloadStatus(count) {
 }
 
 function getBarColor(count) {
-  if (count >= 6) return '#cc1919';
-  if (count >= 3) return '#0070f2';
-  return '#188918';
+  if (count >= 6) return '#BB0000';
+  if (count >= 3) return '#0070F2';
+  return '#107E3E';
 }
 
 export default function TeamWorkload({ engagements }) {
@@ -37,9 +37,14 @@ export default function TeamWorkload({ engagements }) {
       <div className={styles.workloadCard}>
         <div className={styles.workloadHeader}>
           <h3 className={styles.workloadTitle}>
-            <Users size={16} color="#0070f2" />
+            <Users size={15} color="#0070f2" />
             Team Capacity & Workload
           </h3>
+          <div className={styles.legendRow}>
+            <span className={`${styles.statusBadge} ${styles.underutilized}`}>Underutilized &lt;3</span>
+            <span className={`${styles.statusBadge} ${styles.balanced}`}>Balanced 3–5</span>
+            <span className={`${styles.statusBadge} ${styles.overloaded}`}>Overloaded 6+</span>
+          </div>
         </div>
 
         <div className={styles.metricsRow}>
@@ -59,24 +64,19 @@ export default function TeamWorkload({ engagements }) {
 
         <div className={styles.chartContainer}>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={workloadData} layout="vertical" margin={{ top: 5, right: 30, left: 60, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" horizontal={false} />
-              <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} axisLine={{ stroke: '#e5e7eb' }} />
-              <YAxis
-                type="category"
-                dataKey="name"
-                tick={{ fontSize: 11 }}
-                axisLine={{ stroke: '#e5e7eb' }}
-                width={55}
-              />
+            <BarChart data={workloadData} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#C8DCEF" vertical={false} />
+              <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#3A536B', fontWeight: 600 }} axisLine={{ stroke: '#C8DCEF' }} tickLine={false} />
+              <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#6E8FAB' }} axisLine={false} tickLine={false} />
               <Tooltip
-                contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.8rem' }}
-                formatter={(value, name, props) => {
+                contentStyle={{ borderRadius: '8px', border: '1px solid #C8DCEF', fontSize: '0.78rem', background: '#fff' }}
+                formatter={(value, _, props) => {
                   const status = getWorkloadStatus(value);
-                  return [`${value} engagements (${status.label})`, props.payload.fullName];
+                  return [`${value} engagements · ${status.label}`, props.payload.fullName];
                 }}
+                cursor={{ fill: 'rgba(0,112,242,0.05)' }}
               />
-              <Bar dataKey="count" radius={[0, 4, 4, 0]} barSize={24}>
+              <Bar dataKey="count" radius={[4, 4, 0, 0]} barSize={32}>
                 {workloadData.map((entry, index) => (
                   <Cell key={index} fill={getBarColor(entry.count)} />
                 ))}
