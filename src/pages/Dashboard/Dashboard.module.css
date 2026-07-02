@@ -107,16 +107,20 @@
 
 .atRiskCard {
   background: var(--color-surface);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-xs);
   border: 1px solid var(--color-border-light);
-  border-left: 4px solid transparent;
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.atRiskCard.riskHigh   { border-left-color: var(--color-danger); }
-.atRiskCard.riskMedium { border-left-color: var(--color-warning); }
-.atRiskCard.riskLow    { border-left-color: var(--color-success); }
+.atRiskCard.riskHigh {
+  border-left: 3px solid var(--color-danger);
+}
+
+.atRiskCard.riskMedium {
+  border-left: 3px solid var(--color-warning);
+}
 
 .atRiskCard:hover {
   transform: translateY(-2px);
@@ -159,14 +163,12 @@
 }
 
 .criticalTitle {
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .criticalCount {
@@ -201,8 +203,9 @@
 
 .criticalCardHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 0.5rem;
   margin-bottom: 0.4rem;
 }
 
@@ -226,6 +229,8 @@
   border-radius: 100px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
 }
 
 .riskBadge.high {
