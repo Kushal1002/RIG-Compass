@@ -64,6 +64,67 @@
   color: var(--color-danger);
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.menuWrapper {
+  position: relative;
+}
+
+.menuTriggerBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--color-neutral-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  transition: all var(--transition);
+}
+
+.menuTriggerBtn:hover {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 20;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.dropdownItemDelete {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-danger);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  text-align: left;
+}
+
+.dropdownItemDelete:hover {
+  background: var(--color-danger-light);
+}
+
 .panelContent {
   padding: 1.25rem 1.5rem;
 }

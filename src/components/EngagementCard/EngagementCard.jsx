@@ -1,4 +1,5 @@
-import { X, Check } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { X, Check, MoreVertical, Trash2 } from 'lucide-react';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import HealthBadge from '../HealthBadge/HealthBadge';
 import { calculateRiskLevel, getPhase } from '../../utils/aiSummaryGenerator';
@@ -22,7 +23,17 @@ const TYPE_TAGS = {
   'SAP BTP Architecture': ['BTP', 'Architecture', 'Cloud Foundry'],
 };
 
-export default function EngagementCard({ engagement, onClose, onGenerateSummary }) {
+export default function EngagementCard({ engagement, onClose, onGenerateSummary, onDelete }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   if (!engagement) return null;
 
   const risk = calculateRiskLevel(engagement);
@@ -61,9 +72,28 @@ export default function EngagementCard({ engagement, onClose, onGenerateSummary 
             <h2 className={styles.panelTitle}>{engagement.customerName}</h2>
             {engagement.projectName && <p className={styles.panelSubtitle}>{engagement.projectName}</p>}
           </div>
-          <button className={styles.closeBtn} onClick={onClose}>
-            <X size={16} />
-          </button>
+          <div className={styles.headerActions}>
+            {onDelete && (
+              <div className={styles.menuWrapper} ref={menuRef}>
+                <button className={styles.menuTriggerBtn} onClick={() => setMenuOpen(o => !o)}>
+                  <MoreVertical size={15} />
+                </button>
+                {menuOpen && (
+                  <div className={styles.dropdownMenu}>
+                    <button
+                      className={styles.dropdownItemDelete}
+                      onClick={() => { setMenuOpen(false); onDelete(engagement); }}
+                    >
+                      <Trash2 size={13} /> Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+            <button className={styles.closeBtn} onClick={onClose}>
+              <X size={16} />
+            </button>
+          </div>
         </div>
 
         <div className={styles.panelContent}>

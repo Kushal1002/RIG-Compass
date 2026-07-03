@@ -77,6 +77,25 @@
   color: var(--color-text-muted);
 }
 
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #0070F2;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.addBtn:hover {
+  background: #0057C2;
+}
+
 @media (max-width: 768px) {
   .pageHeader {
     padding: 1rem;

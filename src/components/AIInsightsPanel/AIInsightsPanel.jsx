@@ -21,7 +21,7 @@ export default function AIInsightsPanel({ engagements }) {
     <div className={styles.insightsSection}>
       <div className={styles.insightsCard}>
         <h3 className={styles.insightsTitle}>
-          <Brain size={16} color="#6366f1" />
+          <Brain size={18} color="#5289ee" />
           AI Insights & Observations
         </h3>
         <div className={styles.insightsList}>

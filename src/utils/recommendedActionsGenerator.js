@@ -1,5 +1,5 @@
 import { calculateRiskLevel } from './aiSummaryGenerator';
-import { calculateHealthScore, getHealthClassification } from './healthScore';
+import { calculateHealthScore } from './healthScore';
 
 export function generateRecommendedActions(engagement) {
   const { status, progress, endDate } = engagement;

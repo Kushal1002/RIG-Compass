@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
-import { Users, AlertTriangle, Rocket, Activity } from 'lucide-react';
+import { Users, AlertTriangle, Rocket, Activity, Plus } from 'lucide-react';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import EngagementTable from '../../components/EngagementTable/EngagementTable';
 import EngagementCard from '../../components/EngagementCard/EngagementCard';
 import AISummaryModal from '../../components/AISummaryModal/AISummaryModal';
 import EditEngagementModal from '../../components/EditEngagementModal/EditEngagementModal';
+import AddEngagementModal from '../../components/AddEngagementModal/AddEngagementModal';
+import DeleteConfirmModal from '../../components/DeleteConfirmModal/DeleteConfirmModal';
 import EmptyState from '../../components/EmptyState/EmptyState';
 import { calculateRiskLevel } from '../../utils/aiSummaryGenerator';
 import styles from './Engagements.module.css';
@@ -17,11 +19,13 @@ const initialFilters = {
   owner: 'All',
 };
 
-export default function Engagements({ engagements: allEngagements, onUpdate }) {
+export default function Engagements({ engagements: allEngagements, onAdd, onUpdate, onDelete }) {
   const [filters, setFilters] = useState(initialFilters);
   const [selectedEngagement, setSelectedEngagement] = useState(null);
   const [summaryEngagement, setSummaryEngagement] = useState(null);
   const [editEngagement, setEditEngagement] = useState(null);
+  const [deleteEngagement, setDeleteEngagement] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const handleFilterChange = (key, value) => {
     if (key === 'reset') {
@@ -67,6 +71,10 @@ export default function Engagements({ engagements: allEngagements, onUpdate }) {
             </p>
           </div>
         </div>
+        <button className={styles.addBtn} onClick={() => setShowAddModal(true)}>
+          <Plus size={14} />
+          New Engagement
+        </button>
       </div>
 
       {/* Quick Stats Bar */}
@@ -104,6 +112,7 @@ export default function Engagements({ engagements: allEngagements, onUpdate }) {
           engagements={filteredEngagements}
           onSelectEngagement={setSelectedEngagement}
           onEditEngagement={setEditEngagement}
+          onDeleteEngagement={setDeleteEngagement}
         />
       ) : (
         <EmptyState />
@@ -114,6 +123,7 @@ export default function Engagements({ engagements: allEngagements, onUpdate }) {
           engagement={selectedEngagement}
           onClose={() => setSelectedEngagement(null)}
           onGenerateSummary={(eng) => setSummaryEngagement(eng)}
+          onDelete={(eng) => { setSelectedEngagement(null); setDeleteEngagement(eng); }}
         />
       )}
 
@@ -129,6 +139,21 @@ export default function Engagements({ engagements: allEngagements, onUpdate }) {
           engagement={editEngagement}
           onSave={onUpdate}
           onClose={() => setEditEngagement(null)}
+        />
+      )}
+
+      {deleteEngagement && (
+        <DeleteConfirmModal
+          engagement={deleteEngagement}
+          onConfirm={onDelete}
+          onClose={() => setDeleteEngagement(null)}
+        />
+      )}
+
+      {showAddModal && (
+        <AddEngagementModal
+          onAdd={onAdd}
+          onClose={() => setShowAddModal(false)}
         />
       )}
     </div>

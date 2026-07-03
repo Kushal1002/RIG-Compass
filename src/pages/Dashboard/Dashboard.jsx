@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AlertTriangle, TrendingUp, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, ShieldAlert } from 'lucide-react';
 import Charts from '../../components/Charts/Charts';
 import TeamWorkload from '../../components/TeamWorkload/TeamWorkload';
 import AIInsightsPanel from '../../components/AIInsightsPanel/AIInsightsPanel';

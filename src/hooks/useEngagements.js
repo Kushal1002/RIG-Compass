@@ -30,11 +30,20 @@ export function useEngagements() {
     }
   }, [engagements]);
 
+  function addEngagement(data) {
+    const newId = Math.max(0, ...engagements.map(e => e.id)) + 1;
+    setEngagements(prev => [...prev, { id: newId, ...data }]);
+  }
+
   function updateEngagement(id, changes) {
     setEngagements(prev =>
       prev.map(e => (e.id === id ? { ...e, ...changes } : e))
     );
   }
 
-  return { engagements, updateEngagement };
+  function deleteEngagement(id) {
+    setEngagements(prev => prev.filter(e => e.id !== id));
+  }
+
+  return { engagements, addEngagement, updateEngagement, deleteEngagement };
 }

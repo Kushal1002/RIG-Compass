@@ -12,7 +12,7 @@ function App() {
   const [activePage, setActivePage] = useState('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isRegional, setIsRegional] = useState(false);
-  const { engagements, updateEngagement } = useEngagements();
+  const { engagements, addEngagement, updateEngagement, deleteEngagement } = useEngagements();
 
   const visibleEngagements = isRegional
     ? engagements.filter(e => e.region === 'APJ')
@@ -23,7 +23,7 @@ function App() {
       case 'dashboard':
         return <Dashboard engagements={visibleEngagements} isRegional={isRegional} />;
       case 'engagements':
-        return <Engagements engagements={visibleEngagements} onUpdate={updateEngagement} />;
+        return <Engagements engagements={visibleEngagements} onAdd={addEngagement} onUpdate={updateEngagement} onDelete={deleteEngagement} />;
       case 'copilot':
         return <EngagementCopilot engagements={visibleEngagements} />;
       case 'reports':
