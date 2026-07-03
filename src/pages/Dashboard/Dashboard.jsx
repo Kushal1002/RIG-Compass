@@ -134,7 +134,6 @@ export default function Dashboard({ engagements, isRegional }) {
                     <ProgressBar progress={eng.progress} status={eng.status} />
                   </div>
                   <div className={`${styles.atRiskFooter} ${styles[eng.risk.toLowerCase()]}`}>
-                    <ShieldAlert size={11} />
                     {eng.status === 'Blocked'
                       ? `Blocked — ${eng.blockers || 'requires escalation'}`
                       : eng.daysToEnd < 0

@@ -107,48 +107,32 @@
 
 .atRiskCard {
   background: var(--color-surface);
-  border-radius: var(--radius-xl);
-  padding: 1.1rem 1.25rem;
-  box-shadow: var(--shadow-xs);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem 0.9rem;
   border: 1px solid var(--color-border-light);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.atRiskCard.riskHigh {
-  border-left: 3px solid var(--color-danger);
-}
-
-.atRiskCard.riskMedium {
-  border-left: 3px solid var(--color-warning);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  transition: box-shadow var(--transition);
 }
 
 .atRiskCard:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.09), 0 1px 3px rgba(0,0,0,0.06);
 }
 
 .atRiskCount {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: var(--color-warning);
-  background: var(--color-warning-light);
-  padding: 0.2rem 0.6rem;
-  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
 }
 
 .atRiskFooter {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.35rem;
-  font-size: 0.72rem;
-  padding: 0.5rem 0.65rem;
-  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
   line-height: 1.4;
 }
 
-.atRiskFooter.high   { color: var(--color-danger);  background: var(--color-danger-light); }
-.atRiskFooter.medium { color: var(--color-warning); background: var(--color-warning-light); }
-.atRiskFooter.low    { color: var(--color-success); background: var(--color-success-light); }
+.atRiskFooter.high   { color: #f43f5e; }
+.atRiskFooter.medium { color: #f59e0b; }
 
 /* Critical Engagements Section */
 .criticalSection {
@@ -223,30 +207,15 @@
 }
 
 .riskBadge {
-  font-size: 0.6rem;
-  font-weight: 700;
-  padding: 0.15rem 0.5rem;
-  border-radius: 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  font-size: 0.68rem;
+  font-weight: 500;
   flex-shrink: 0;
   margin-top: 0.15rem;
 }
 
-.riskBadge.high {
-  background: var(--color-danger-light);
-  color: var(--color-danger);
-}
-
-.riskBadge.medium {
-  background: var(--color-warning-light);
-  color: var(--color-warning);
-}
-
-.riskBadge.low {
-  background: var(--color-success-light);
-  color: var(--color-success);
-}
+.riskBadge.high   { color: #f43f5e; }
+.riskBadge.medium { color: #f59e0b; }
+.riskBadge.low    { color: #10b981; }
 
 .criticalMeta {
   font-size: 0.7rem;
