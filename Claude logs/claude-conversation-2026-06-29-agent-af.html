@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Conversation - agent-af</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+        }
+        .metadata {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .message {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .user {
+            border-left: 4px solid #3498db;
+        }
+        .assistant {
+            border-left: 4px solid #2ecc71;
+        }
+        .tool_use {
+            border-left: 4px solid #f39c12;
+            background: #fffbf0;
+        }
+        .tool_result {
+            border-left: 4px solid #e74c3c;
+            background: #fff5f5;
+        }
+        .system {
+            border-left: 4px solid #95a5a6;
+            background: #f8f9fa;
+        }
+        .role {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Claude Conversation Log</h1>
+        <div class="metadata">
+            <p>Session ID: agent-af31ca09fe7cfe116</p>
+            <p>Date: 2026-06-29 03:57:30</p>
+            <p>Messages: 10</p>
+        </div>
+    </div>
+    <div class="message user">
+        <div class="role">👤 User</div>
+        <div class="content">Explore the project at /Users/I578478/RIG Engagement Tracker. Give me a comprehensive overview of:
+1. Directory structure (all files and folders)
+2. package.json dependencies and scripts
+3. Main entry points (App.jsx, index.js, main.jsx, etc.)
+4. All component files
+5. Any configuration files (vite.config, .env files, etc.)
+6. Any data files or mock data
+7. Any utility/helper files
+8. Any API calls or external integrations
+
+Be thorough - list every file and give me the full contents of key files like package.json, App.jsx/App.js, and any config files.</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">I'll conduct a thorough exploration of the RIG Engagement Tracker project. Let me start by examining the directory structure and key files.</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Now let me get a complete directory structure and read the key files:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Now let me read all the key files:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Now let me read the data file and all utility files:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Now let me read all the main component files:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Let me read a few more key components:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Perfect! Now let me check the README and verify the complete structure:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Now let me read the remaining component files quickly:</div>
+    </div>
+    <div class="message assistant">
+        <div class="role">🤖 Claude</div>
+        <div class="content">Perfect! Now I have a complete understanding of the project. Let me compile the comprehensive overview.
+
+## Comprehensive Project Overview: RIG Engagement Tracker
+
+### 1. DIRECTORY STRUCTURE
+
+```
+/Users/I578478/RIG Engagement Tracker/
+├── .git/                          # Git repository
+├── .gitignore
+├── .DS_Store
+├── node_modules/                  # Dependencies (141 directories)
+├── dist/                          # Build output
+├── public/                        # Static assets
+├── src/
+│   ├── components/
+│   │   ├── AIInsightsPanel/       # AI-powered portfolio insights panel
+│   │   ├── AISummaryModal/        # AI-generated engagement summaries
+│   │   ├── BTPSolutionAdvisor/    # SAP BTP solution recommendation engine
+│   │   ├── Charts/                # Recharts visualizations (status, type, progress)
+│   │   ├── EngagementCard/        # Detail side panel with timeline &amp; actions
+│   │   ├── EngagementCopilot/     # AI chatbot for portfolio queries
+│   │   ├── EngagementTable/       # Sortable, paginated engagement table
+│   │   ├── ExecutiveReport/       # Executive report generator &amp; downloader
+│   │   ├── ExecutiveSummary/      # Portfolio summary card (hero section)
+│   │   ├── FilterBar/             # Search &amp; multi-filter controls
+│   │   ├── Header/                # App header with branding
+│   │   ├── HealthBadge/           # Circular health score badge (0-100)
+│   │   ├── KPISection/            # KPI metric cards display
+│   │   ├── ProgressBar/           # Reusable progress bar component
+│   │   ├── Sidebar/               # Navigation sidebar with sections
+│   │   ├── TeamWorkload/          # Team capacity visualization (horizontal bar chart)
+│   │   └── EmptyState/            # Empty state placeholder
+│   ├── data/
+│   │   └── engagements.js         # 14 mock engagement records + monthly progress data
+│   ├── pages/
+│   │   ├── Dashboard/             # Main portfolio dashboard
+│   │   ├── Engagements/           # Operational engagement workspace
+│   │   └── Settings/              # Settings page
+│   ├── utils/
+│   │   ├── aiSummaryGenerator.js  # AI summary templates + risk calculation
+│   │   ├── aiInsightsEngine.js    # Dynamic portfolio insights generation
+│   │   ├── copilotEngine.js       # Intent detection &amp; query processing
+│   │   ├── executiveReportGenerator.js # Executive report generation &amp; download
+│   │   ├── healthScore.js         # Health score calculation (0-100)
+│   │   ├── recommendedActionsGenerator.js # Action recommendations by context
+│   │   └── solutionAdvisor.js     # SAP BTP service recommendations by industry/problem
+│   ├── styles/
+│   │   └── global.css             # Global CSS variables, resets, animations
+│   ├── App.jsx                    # Main app component with routing logic
+│   └── main.jsx                   # React entry point
+├── index.html                     # HTML template with Google Fonts
+├── package.json                   # Dependencies &amp; scripts
+├── package-lock.json
+├── vite.config.js                 # Vite configuration
+├── vercel.json                    # Vercel deployment config
+├── eslint.config.js               # ESLint configuration
+└── README.md
+```
+
+---
+
+### 2. PACKAGE.json DEPENDENCIES &amp; SCRIPTS
+
+**File:** `/Users/I578478/RIG Engagement Tracker/package.json`
+
+```json
+{
+  "name": "rig-engagement-tracker",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "vite": "^8.0.12"
+  }
+}
+```
+
+**Key Dependencies:**
+- **React 19.2.6** - UI framework with latest hooks API
+- **Recharts 3.8.1** - Charting library (pie, bar, line charts)
+- **Lucide React 1.17.0** - Icon library (18x24 icons)
+- **Vite 8.0.12** - Build tool &amp; dev server (ES modules)
+- **ESLint 10.3.0** - Code linting with React hooks rules
+
+---
+
+### 3. MAIN ENTRY POINTS
+
+#### `/Users/I578478/RIG Engagement Tracker/src/main.jsx`
+```javascript
+Initializes React app, renders App component to #root element, uses StrictMode
+```
+
+#### `/Users/I578478/RIG Engagement Tracker/src/App.jsx`
+**Core application component** - Implements main routing &amp; layout:
+- Header component (always visible)
+- Sidebar with 6 navigation sections
+- Page router (activePage state-based)
+- Collapses responsive sidebar
+
+**Pages (controlled by activePage state):**
+1. `dashboard` → Dashboard component
+2. `engagements` → Engagements component
+3. `copilot` → EngagementCopilot component
+4. `advisor` → BTPSolutionAdvisor component
+5. `reports` → ExecutiveReport component
+6. `settings` → Settings component
+
+#### `/Users/I578478/RIG Engagement Tracker/index.html`
+```html
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;RIG Engagement Tracker&lt;/title&gt;
+    &lt;!-- Google Fonts: Inter (400,500,600,700 weights) --&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+
+---
+
+### 4. ALL COMPONENT FILES
+
+#### **Layout Components**
+
+1. **Header** (`/src/components/Header/Header.jsx`)
+   - Fixed top bar with logo, app title, subtitle
+   - Uses BarChart3 icon from lucide-react
+   - CSS Module: Header.module.css
+
+2. **Sidebar** (`/src/components/Sidebar/Sidebar.jsx`)
+   - Collapsible navigation sidebar (240px / 68px collapsed)
+   - 6 navigation items across 3 sections (main, ai, tools)
+   - Mobile overlay toggle
+   - User footer info (KK - Kushal Kumar, RIG APJ Team)
+   - CSS Module: Sidebar.module.css
+
+#### **Dashboard Page Components**
+
+3. **Dashboard** (`/src/pages/Dashboard/Dashboard.jsx`) - Main portfolio view
+   - Imports 8 sub-components
+   - Displays: Executive Summary, AI Insights, KPIs, Charts, Risk Distribution, Health Distribution, Team Workload, Critical Engagements, Executive Recommendations
+   - Uses `useMemo` for performance optimization
+   - CSS Module: Dashboard.module.css
+
+4. **ExecutiveSummary** (`/src/components/ExecutiveSummary/ExecutiveSummary.jsx`)
+   - Hero card with portfolio narrative
+   - Shows: total engagements, active count, avg progress, avg health, blocked projects, best performing type
+   - Circular health metric visualization
+   - CSS Module: ExecutiveSummary.module.css
+
+5. **AIInsightsPanel** (`/src/components/AIInsightsPanel/AIInsightsPanel.jsx`)
+   - Grid of AI-generated insights from `aiInsightsEngine.js`
+   - 8 insight categories: blocked, timeline risk, best type, industry volume, avg completion, critical health, workload imbalance, near completion
+   - Icon mapping for visual indicators
+   - CSS Module: AIInsightsPanel.module.css
+
+6. **KPISection** (`/src/components/KPISection/KPISection.jsx`)
+   - 5 KPI cards: Total, Active, Completed, Blocked, Avg Progress
+   - Icons and trend indicators
+   - CSS Module: KPISection.module.css
+
+7. **Charts** (`/src/components/Charts/Charts.jsx`)
+   - 3 Recharts visualizations:
+     - Pie chart: Engagement status distribution
+     - Bar chart: By engagement type
+     - Line chart: Progress trend (monthly)
+   - Uses data from engagements.js
+   - CSS Module: Charts.module.css
+
+8. **TeamWorkload** (`/src/components/TeamWorkload/TeamWorkload.jsx`)
+   - Horizontal bar chart showing consultant workload
+   - Color-coded by load: Overloaded (&gt;=6), Balanced (3-5), Underutilized (&lt;3)
+   - Metrics: Most/least loaded, avg per consultant
+   - CSS Module: TeamWorkload.module.css
+
+#### **Engagements Page Components**
+
+9. **Engagements** (`/src/pages/Engagements/Engagements.jsx`) - Operational workspace
+   - Stats bar (active, blocked, high-risk, avg progress)
+   - FilterBar component
+   - EngagementTable or EmptyState
+   - Modals: EngagementCard, AISummaryModal
+   - CSS Module: Engagements.module.css
+
+10. **FilterBar** (`/src/components/FilterBar/FilterBar.jsx`)
+    - Search by customer name
+    - Dropdowns: Status, Industry, Type, Owner (all dynamic)
+    - Reset button if filters active
+    - CSS Module: FilterBar.module.css
+
+11. **EngagementTable** (`/src/components/EngagementTable/EngagementTable.jsx`)
+    - Sortable table (11 columns)
+    - Pagination (7 rows per page)
+    - Columns: Customer, Industry, Type, Owner, Status, Progress, Health, Risk, Start, End, Actions
+    - Click row to open EngagementCard
+    - CSS Module: EngagementTable.module.css
+
+12. **EngagementCard** (`/src/components/EngagementCard/EngagementCard.jsx`)
+    - Side panel with detailed engagement info
+    - Sections: Health &amp; Status, Tags, Details (6 fields), Blockers, Notes, Journey Timeline, Recommended Actions, AI Summary button
+    - Timeline shows 6 phases: Discovery, Env Setup, Design, Prototype, Testing, Go Live
+    - CSS Module: EngagementCard.module.css
+
+13. **AISummaryModal** (`/src/components/AISummaryModal/AISummaryModal.jsx`)
+    - Modal displaying AI-generated engagement summary
+    - Simulates processing delay (1.5s)
+    - Shows customer tag, summary text, generation timestamp
+    - CSS Module: AISummaryModal.module.css
+
+14. **EmptyState** (`/src/components/EmptyState/EmptyState.jsx`)
+    - Placeholder when no engagements match filters
+    - SearchX icon, title, description
+    - CSS Module: EmptyState.module.css
+
+#### **AI Feature Components**
+
+15. **EngagementCopilot** (`/src/components/EngagementCopilot/EngagementCopilot.jsx`)
+    - Chat interface for portfolio queries
+    - 6 suggested questions as chips
+    - Uses `processCopilotQuery()` from copilotEngine.js
+    - Simulates 800ms response delay
+    - CSS Module: EngagementCopilot.module.css
+
+16. **BTPSolutionAdvisor** (`/src/components/BTPSolutionAdvisor/BTPSolutionAdvisor.jsx`)
+    - Form-based recommendation engine
+    - Selects: Industry (5), Problem (6)
+    - Returns: Services list, reasoning, benefits, complexity
+    - Uses `getRecommendation()` from solutionAdvisor.js
+    - CSS Module: BTPSolutionAdvisor.module.css
+
+17. **ExecutiveReport** (`/src/components/ExecutiveReport/ExecutiveReport.jsx`)
+    - Generates &amp; displays executive report as text
+    - Download button exports as .txt file
+    - Uses `generateExecutiveReport()` from executiveReportGenerator.js
+    - CSS Module: ExecutiveReport.module.css
+
+#### **UI Components**
+
+18. **HealthBadge** (`/src/components/HealthBadge/HealthBadge.jsx`)
+    - Circular progress indicator (SVG)
+    - Score 0-100 with color classification: Healthy (&gt;=90), Stable (70-89), Needs Attention (50-69), Critical (&lt;50)
+    - Compact &amp; full-size variants
+    - CSS Module: HealthBadge.module.css
+
+19. **ProgressBar** (`/src/components/ProgressBar/ProgressBar.jsx`)
+    - Horizontal progress bar with percentage label
+    - Color-coded: Complete (100%), High (70+), Medium (40-69), Low (&lt;40), Blocked
+    - CSS Module: ProgressBar.module.css
+
+#### **Settings Page**
+
+20. **Settings** (`/src/pages/Settings/Settings.jsx`)
+    - Info card with app metadata
+    - Shows: Version (v2.0), Team, Data source (local mock), Architecture
+    - CSS Module: Settings.module.css
+
+**Total: 20 React components + 20 CSS Modules**
+
+---
+
+### 5. CONFIGURATION FILES
+
+#### `/Users/I578478/RIG Engagement Tracker/vite.config.js`
+```javascript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
+```
+- Minimal config - uses React plugin
+- Default dev server: http://localhost:5173
+- Build output: dist/
+
+#### `/Users/I578478/RIG Engagement Tracker/vercel.json`
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite"
+}
+```
+- Vercel deployment configuration
+
+#### `/Users/I578478/RIG Engagement Tracker/eslint.config.js`
+```javascript
+- JS, JSX linting with React hooks rules
+- Recommended ESLint, React Hooks, React Refresh configs
+- Browser globals
+- ECMAFeatures: jsx enabled
+```
+
+#### `/Users/I578478/RIG Engagement Tracker/.gitignore`
+Standard gitignore for Node/Vite projects
+
+#### `.env files`
+**None present** - Project uses only local mock data, no external APIs
+
+---
+
+### 6. DATA FILES &amp; MOCK DATA
+
+#### `/Users/I578478/RIG Engagement Tracker/src/data/engagements.js`
+
+**14 Mock Engagements** (array export):
+```
+Global Bank Asia, Pacific Manufacturing Co, MediCare Plus, TelcoMax Networks,
+RetailHub International, National Insurance Corp, AutoDrive Industries,
+City Health Network, SmartRetail Solutions, Asia Telecom Group,
+Premier Banking Ltd, GreenEnergy Manufacturing, QuickMart Stores,
+Regional Health Authority
+```
+
+**Engagement Data Structure:**
+- `id`, `customerName`, `industry`, `engagementType`, `owner`, `status`, `progress`, `startDate`, `endDate`, `blockers`, `notes`
+
+**Statuses:** Not Started, In Progress, Completed, Blocked (4 types)
+
+**Industries:** Banking, Manufacturing, Healthcare, Retail, Telecom (5 types)
+
+**Engagement Types:** 
+- Business AI
+- SAP Build
+- CAP (Cloud Application Programming Model)
+- Integration Suite
+- SAP BTP Architecture
+
+**Team Members (Owners):**
+- Rahul Mehta (Business AI)
+- Sarah Chen (SAP Build, Architecture)
+- Amir Khan (CAP, Integration Suite)
+- Priya Sharma (Integration Suite, SAP Build)
+- David Park (SAP BTP Architecture, CAP)
+
+**Monthly Progress Data:**
+```javascript
+{ month: "Jan", avgProgress: 22 },
+{ month: "Feb", avgProgress: 31 },
+{ month: "Mar", avgProgress: 38 },
+{ month: "Apr", avgProgress: 45 },
+{ month: "May", avgProgress: 52 },
+{ month: "Jun", avgProgress: 58 }
+```
+
+---
+
+### 7. UTILITY/HELPER FILES
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/aiSummaryGenerator.js`
+**Functions:**
+- `generateAISummary(engagement)` - Creates AI-generated narrative summary with recommendations based on 4 status templates (blocked, inProgress, completed, notStarted)
+- `calculateRiskLevel(engagement)` - Returns High/Medium/Low based on status, progress, days to end date
+- `getPhase(progress)` - Maps progress % to engagement phase (Discovery, Environment Setup, Solution Design, Prototype, Testing, Go Live)
+
+**Templates:** 3 variants per status with variable substitution
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/healthScore.js`
+**Functions:**
+- `calculateHealthScore(engagement)` - 0-100 score based on: risk level (-35/-15), status (-25/-5), timeline penalties (-20/-15), blocker count (-5 each)
+- `getHealthClassification(score)` - Returns {label, color, bg} for score ranges: Healthy, Stable, Needs Attention, Critical
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/aiInsightsEngine.js`
+**Function:**
+- `generateAIInsights(engagements)` - Returns array of 8 insight objects with: id, icon, insight text, impact (High/Medium/Low), category
+- Detects: blocked engagements, at-risk timelines, best performing type, top industry, avg completion, critical health, workload imbalance, near-completion projects
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/copilotEngine.js`
+**Function:**
+- `processCopilotQuery(query, engagements)` - Intent detection &amp; response generation for queries about: blocked, risk, workload, Business AI, completion, attention, summary, customer search
+- Returns: {text, data}
+
+**Intent Patterns:** blocked, stuck, stalled, risk, danger, critical, workload, capacity, load, team, business ai, ai project, complet, finish, done, near, attention, week, urgent, priority, summary, overview, status, how
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/solutionAdvisor.js`
+**Functions:**
+- `getRecommendation(industry, problem)` - Returns SAP BTP service recommendations
+- `getIndustries()` - Returns 5 industries: Banking, Retail, Healthcare, Manufacturing, Telecom
+- `getProblems()` - Returns 6 problem types: Customer Support, Document Processing, Workflow Automation, Predictive Analytics, Knowledge Search, Custom Extension
+
+**Solution Map:** Industry→Problem→{services[], reasoning, benefits[], complexity}
+- Each problem type has 4-5 recommended services with benefits and complexity rating (Low/Medium/High)
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/executiveReportGenerator.js`
+**Functions:**
+- `generateExecutiveReport(engagements)` - Creates formatted text report with 8 sections: Header, Summary, Risk &amp; Health, Team Capacity, AI Insights, Recommendations, Footer
+- `downloadReport(content, filename)` - Creates Blob, triggers download, cleans up URL
+
+#### `/Users/I578478/RIG Engagement Tracker/src/utils/recommendedActionsGenerator.js`
+**Function:**
+- `generateRecommendedActions(engagement)` - Returns array of action objects with: {priority, action, icon}
+- Context-aware: Blocked status, Progress tracking, Timeline urgency, Pre-engagement prep, Near completion, Completed follow-up
+- Priority levels: Critical, High, Medium, Low
+
+---
+
+### 8. API CALLS &amp; EXTERNAL INTEGRATIONS
+
+**No external API calls in this application.**
+
+**Data Flow:**
+- All data originates from local mock data in `/src/data/engagements.js`
+- No backend server or database
+- No authentication/authorization
+- No external API integrations (AI APIs are simulated with local logic)
+- All calculations happen client-side in utility functions
+
+**External Libraries:**
+- **Recharts** - Used for charting visualization only (no API calls)
+- **Lucide React** - Icon library (bundled, no runtime calls)
+- **React/React-DOM** - UI framework
+
+**Simulated Delays:**
+- EngagementCopilot: 800ms delay before showing response
+- AISummaryModal: 1500ms delay before showing summary
+
+---
+
+### GLOBAL STYLES
+
+**File:** `/Users/I578478/RIG Engagement Tracker/src/styles/global.css`
+
+**CSS Variables (Root):**
+- **Colors:** Primary (#0070f2), Success (#188918), Warning (#e76500), Danger (#cc1919), Neutral (#6b7280)
+- **Backgrounds:** --color-bg (#f0f2f5), --color-surface (#ffffff)
+- **Text:** --color-text (#1a2332), --color-text-secondary, --color-text-muted
+- **Shadows:** xs through xl (blur/offset variations)
+- **Radius:** xs (4px) through 2xl (24px)
+- **Layout:** --sidebar-width (240px), --sidebar-collapsed (68px), --header-height (60px)
+- **Font:** Inter sans-serif from Google Fonts
+- **Transitions:** fast (120ms), normal (200ms), slow (300ms)
+
+**Animations:**
+- fadeIn, fadeInScale, slideInRight, slideInUp, pulse, shimmer, spin
+
+---
+
+### SUMMARY
+
+**Project Type:** React 19 Single-Page Application (SPA) - Enterprise Portfolio Management Dashboard
+
+**Tech Stack:** React 19 + Vite + Recharts + Lucide React + CSS Modules
+
+**Core Features:**
+1. Portfolio Dashboard with KPIs, charts, insights
+2. Engagement Management (table, filters, search, detail view)
+3. AI-Powered Features (Summary generator, Copilot, Solution Advisor)
+4. Executive Reporting (downloadable text reports)
+5. Team Capacity Management
+6. Risk &amp; Health Scoring
+
+**Architecture:** 
+- Component-based (20 React components)
+- State management: React hooks only (no Redux/Zustand)
+- Data: 14 mock engagements with calculated analytics
+- Utility functions: 7 AI/calculation engines
+- Fully client-side, no backend
+
+**Deployment:** Ready for Vercel (vercel.json included)</div>
+    </div>
+
+</body>
+</html>
