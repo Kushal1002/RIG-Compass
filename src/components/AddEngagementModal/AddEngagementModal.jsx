@@ -188,7 +188,8 @@ export default function AddEngagementModal({ onAdd, onClose, currentUser }) {
       });
       onClose();
     } catch (err) {
-      setSubmitError('Failed to submit proposal. Please try again.');
+      console.error('Proposal submit error:', err);
+      setSubmitError(`Failed to submit proposal: ${err.message}`);
       setSubmitting(false);
     }
   };
