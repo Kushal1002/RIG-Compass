@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, Users, Save, X, Pencil, Info, Layers, Database, Tag } from 'lucide-react';
+import { User, Briefcase, Users, Save, X, Pencil, Info, Layers, Database, Tag, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react';
 import styles from './Settings.module.css';
 
 const PROFILE_KEY = 'rig_user_profile';
@@ -23,6 +23,29 @@ export default function Settings() {
   const [draft, setDraft] = useState(profile);
   const [editing, setEditing] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [mxpStatus, setMxpStatus] = useState(null); // null | 'running' | result
+
+  const runMxpImport = async (file) => {
+    setMxpStatus('running');
+    try {
+      let res;
+      if (file) {
+        const form = new FormData();
+        form.append('file', file);
+        res = await fetch('/api/mxp/import-file', { method: 'POST', body: form });
+      } else {
+        res = await fetch('/api/mxp/import-path', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filePath: '/Users/I578478/Downloads/Entries-2026-07-15 13_05_30.xlsx' }),
+        });
+      }
+      const json = await res.json();
+      setMxpStatus(json);
+    } catch (err) {
+      setMxpStatus({ ok: false, error: err.message });
+    }
+  };
 
   useEffect(() => {
     if (saved) {
@@ -171,7 +194,7 @@ export default function Settings() {
               <div className={styles.fieldIcon}><Database size={13} /></div>
               <div className={styles.fieldBody}>
                 <label className={styles.fieldLabel}>Data Source</label>
-                <span className={styles.fieldValue}>Local storage (mock data)</span>
+                <span className={styles.fieldValue}>CAP backend · SQLite · MXP sync</span>
               </div>
             </div>
 
@@ -184,6 +207,74 @@ export default function Settings() {
             </div>
           </div>
         </section>
+
+        {/* MXP Data Sync */}
+        <section className={styles.card}>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardIconWrap}>
+              <RefreshCw size={15} />
+            </div>
+            <div>
+              <h2 className={styles.cardTitle}>MXP Data Sync</h2>
+              <p className={styles.cardDesc}>Import customer data from your MXP workspace</p>
+            </div>
+          </div>
+
+          <div className={styles.fieldList}>
+            <div className={styles.field}>
+              <div className={styles.fieldIcon}><Database size={13} /></div>
+              <div className={styles.fieldBody}>
+                <label className={styles.fieldLabel}>Workspace</label>
+                <span className={styles.fieldValue} style={{ fontFamily: 'monospace', fontSize: '11px' }}>d95c52db-500d-4de3-95e9-c14b9749b886</span>
+              </div>
+            </div>
+            <div className={styles.field}>
+              <div className={styles.fieldIcon}><Layers size={13} /></div>
+              <div className={styles.fieldBody}>
+                <label className={styles.fieldLabel}>Entity</label>
+                <span className={styles.fieldValue}>Customer (CRM Account)</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.editActions} style={{ marginTop: '12px', flexWrap: 'wrap', gap: '8px' }}>
+            <label className={styles.saveBtn} style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}>
+              <RefreshCw size={13} />
+              Upload XLSX
+              <input
+                type="file"
+                accept=".xlsx"
+                style={{ display: 'none' }}
+                disabled={mxpStatus === 'running'}
+                onChange={e => { if (e.target.files[0]) runMxpImport(e.target.files[0]); e.target.value = ''; }}
+              />
+            </label>
+            <button
+              className={styles.editBtn}
+              onClick={() => runMxpImport(null)}
+              disabled={mxpStatus === 'running'}
+              style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+              title="Import from last downloaded file in Downloads folder"
+            >
+              <RefreshCw size={13} style={{ animation: mxpStatus === 'running' ? 'spin 1s linear infinite' : 'none' }} />
+              {mxpStatus === 'running' ? 'Importing…' : 'Re-import Last Export'}
+            </button>
+          </div>
+
+          {mxpStatus && mxpStatus !== 'running' && (
+            <div className={styles.savedBanner} style={{
+              background: mxpStatus.ok ? 'var(--success-light, #f0fdf4)' : 'var(--danger-light, #fef2f2)',
+              color: mxpStatus.ok ? 'var(--success, #16a34a)' : 'var(--danger, #dc2626)',
+              marginTop: '10px', display: 'flex', alignItems: 'center', gap: '6px'
+            }}>
+              {mxpStatus.ok
+                ? <><CheckCircle size={13} /> Imported {mxpStatus.total} records — {mxpStatus.inserted} new, {mxpStatus.updated} updated{mxpStatus.failed > 0 ? `, ${mxpStatus.failed} failed` : ''}</>
+                : <><AlertCircle size={13} /> {mxpStatus.error}</>
+              }
+            </div>
+          )}
+        </section>
+
       </div>
     </div>
   );

@@ -6,14 +6,15 @@ import {
 import styles from './Sidebar.module.css';
 
 const JouleIcon = () => <img src="/301104_da-2_blue.svg" alt="Joule" className={styles.jouleNavIcon} />;
-const DashboardIcon = () => <img src="/299449_bbyd-dashboard_blue.svg" alt="Dashboard" className={styles.jouleNavIcon} />;
-const EngagementIcon = () => <img src="/298849_group_blue.svg" alt="Engagements" className={styles.jouleNavIcon} />;
 const ReportIcon = () => <img src="/299078_manager-insight_blue.svg" alt="Reports" className={styles.jouleNavIcon} />;
 const SettingsIcon = () => <img src="/298772_action-settings_blue.svg" alt="Settings" className={styles.jouleNavIcon} />;
 
+const ProposalsIcon = () => <img src="/298849_group_blue.svg" alt="Proposals" className={styles.jouleNavIcon} />;
+const ProjectsIcon  = () => <img src="/299449_bbyd-dashboard_blue.svg" alt="Projects" className={styles.jouleNavIcon} />;
+
 const NAV_ITEMS = [
-  { id: 'dashboard', label: 'Dashboard', icon: DashboardIcon, section: 'main' },
-  { id: 'engagements', label: 'Engagements', icon: EngagementIcon, section: 'main', badge: null },
+  { id: 'proposals', label: 'Proposals', icon: ProposalsIcon, section: 'main' },
+  { id: 'projects',  label: 'Projects',  icon: ProjectsIcon,  section: 'main' },
   { id: 'copilot', label: 'Joule Work', icon: JouleIcon, section: 'ai' },
   { id: 'reports', label: 'Reports', icon: ReportIcon, section: 'tools' },
   { id: 'settings', label: 'Settings', icon: SettingsIcon, section: 'tools' },

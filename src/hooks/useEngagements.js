@@ -1,49 +1,44 @@
-import { useState, useEffect } from 'react';
-import { engagements as mockData } from '../data/engagements';
+import { useState, useEffect, useCallback } from 'react';
+import * as api from '../services/api';
 
-const STORAGE_KEY = 'rig_engagements_v3';
-const SEED_VERSION = mockData.map(e => [e.id, e.customerName, e.projectName, e.region, e.industry, e.owner, e.status].join(':')).join('|');
-const VERSION_KEY = 'rig_engagements_version_v3';
-
-function load() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    const version = localStorage.getItem(VERSION_KEY);
-    if (raw && version === SEED_VERSION) return JSON.parse(raw);
-  } catch {
-    // corrupted storage — fall back to mock data
-  }
-  // clear any stale keys
-  Object.keys(localStorage).filter(k => k.startsWith('rig_')).forEach(k => localStorage.removeItem(k));
-  return mockData;
+function normalise(e) {
+  return { ...e, id: e.ID };
 }
 
 export function useEngagements() {
-  const [engagements, setEngagements] = useState(load);
+  const [engagements, setEngagements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const load = useCallback(async () => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(engagements));
-      localStorage.setItem(VERSION_KEY, SEED_VERSION);
-    } catch {
-      // storage quota exceeded — continue without persisting
+      setLoading(true);
+      setError(null);
+      const data = await api.fetchEngagements();
+      setEngagements(data.map(normalise));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-  }, [engagements]);
+  }, []);
 
-  function addEngagement(data) {
-    const newId = Math.max(0, ...engagements.map(e => e.id)) + 1;
-    setEngagements(prev => [...prev, { id: newId, ...data }]);
+  useEffect(() => { load(); }, [load]);
+
+  async function addEngagement(data) {
+    const created = await api.createEngagement(data);
+    setEngagements(prev => [...prev, normalise(created)]);
   }
 
-  function updateEngagement(id, changes) {
-    setEngagements(prev =>
-      prev.map(e => (e.id === id ? { ...e, ...changes } : e))
-    );
+  async function updateEngagement(id, changes) {
+    await api.updateEngagement(id, changes);
+    setEngagements(prev => prev.map(e => e.id === id ? { ...e, ...changes } : e));
   }
 
-  function deleteEngagement(id) {
+  async function deleteEngagement(id) {
+    await api.deleteEngagement(id);
     setEngagements(prev => prev.filter(e => e.id !== id));
   }
 
-  return { engagements, addEngagement, updateEngagement, deleteEngagement };
+  return { engagements, addEngagement, updateEngagement, deleteEngagement, loading, error };
 }
